@@ -1,6 +1,6 @@
 (function(){
 	
-	angular.module('udd.core')
+	angular.module('udd.login')
 		.config(config);
 	
 	config.$inject = ['$urlRouterProvider', '$stateProvider'];
@@ -8,20 +8,24 @@
 		$urlRouterProvider.otherwise("/home");
 
 		$stateProvider
-		.state("home", {
-			url: '/home',
+		.state("login", {
+			url: '/login',
 			views:{
 
 				navbar: {
 
-					templateUrl: "app/components/core/navbar.html",
-					controller: 'CoreController',
-					controllerAs: 'coc'
+					
+						templateUrl: "app/components/core/navbar.html",
+						controller: 'CoreController',
+						controllerAs: 'coc'
+
 
 				},
 				content: {
 
-					templateUrl: "app/components/core/core.html"
+					templateUrl: "app/components/login/login.html",
+					controller : 'LoginController',
+					controllerAs : 'lic'
 
 				},
 				footer: {

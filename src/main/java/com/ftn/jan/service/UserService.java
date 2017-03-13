@@ -15,10 +15,12 @@ public interface UserService {
 	public void insertUser(User u);
 	public List<User> findAll();
 	public User login(String username,String password);
+	public User getLoggedInUser();
 	public User findByUsername(String username);
 	public void changePassword(String newPassword);
 	public boolean changePassword(ChangePasswordViewModel changePasswordViewModel);
 	public void updateProfile(UserViewModel userViewModel);
+	public void logout();
 	
 	
 }

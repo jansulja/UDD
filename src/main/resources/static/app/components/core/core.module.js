@@ -1,5 +1,5 @@
 (function(){
 	
-	angular.module('udd.core',['ui.router']);
+	angular.module('udd.core',['ui.router','restangular']);
 	
 })();

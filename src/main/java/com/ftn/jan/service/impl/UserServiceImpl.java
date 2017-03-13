@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -41,7 +42,7 @@ public class UserServiceImpl implements UserService {
 		User user = userRepository.findByUsername(username);
 		
 		if(user!=null && user.getPassword().equals(password)){
-			
+			SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(username, password));
 			return user;
 		}else{
 			return null;
@@ -112,6 +113,20 @@ public class UserServiceImpl implements UserService {
 		String currentPrincipalName = authentication.getName();
 		User currentUser = this.findByUsername(currentPrincipalName);
 		return currentUser;
+	}
+
+
+	@Override
+	public User getLoggedInUser() {
+		return getCurrentUser();
+	}
+
+
+	@Override
+	public void logout() {
+		// TODO Auto-generated method stub
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
 	}
 	
 	
