@@ -14,7 +14,9 @@
 
 				navbar: {
 
-					templateUrl: "app/components/core/navbar.html"
+					templateUrl: "app/components/core/navbar.html",
+					controller: 'CoreController',
+					controllerAs: 'coc'
 
 				},
 				content: {

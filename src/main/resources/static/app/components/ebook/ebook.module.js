@@ -1,6 +1,6 @@
 (function(){
 	
-	angular.module('udd.ebook',['ui.router','restangular']);
+	angular.module('udd.ebook',['udd.ebook.edit','ui.router','restangular']);
 	
 	
 	

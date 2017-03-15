@@ -1,0 +1,32 @@
+<form class="state-form form-horizontal" name="edc.form" ng-submit="edc.submitForm()" novalidate>
+	<div class="modal-header">
+	    <h2 class="text-center"> Edit ebook </h2>
+	</div>
+	<div class="modal-body">
+	    <div class="form-group">
+	    	<div class="col-sm-8 col-sm-offset-2">
+	    		<label for="title" class="col-sm-2 control-label">Title</label>
+	    		<div class="col-sm-10">
+	    			<input class="form-control" ng-model-options="{updateOn: 'default blur', debounce: { 'default': 0, 'blur': 0}}" type="text" ng-model="edc.ebook.title" id="title" name="title" placeholder="Title"/ required>
+	    			<p class="text-center" ng-show="edc.form.title.$touched && edc.form.title.$error.required" style="color: red;" >Error Title</p>
+	    		</div> 
+	        </div>
+	    </div>
+	    <div class="form-group">
+	    	<div class="col-sm-8 col-sm-offset-2">
+	    		<label for="author" class="col-sm-2 control-label">Author</label>
+	    		<div class="col-sm-10">
+	    			<input class="form-control" ng-model-options="{updateOn: 'default blur', debounce: { 'default': 0, 'blur': 0}}" type="text" ng-model="edc.ebook.author" id="author" name="author" placeholder="Author"/ required>
+	    			<p class="text-center" ng-show="edc.form.author.$touched && edc.form.author.$error.required" style="color: red;" >Error Author</p>
+	    		</div> 
+	        </div>
+	    </div>
+	   
+	</div>
+	<div class="modal-footer">
+		<div class="text-center">
+		    <button class="btn btn-success" type="submit" ng-disabled="edc.form.$invalid">Save</button>
+		    <button class="btn btn-warning" type="button" id="cancelButton" ng-click="edc.cancel()">Cancel</button>
+		</div>
+	</div>
+</form>

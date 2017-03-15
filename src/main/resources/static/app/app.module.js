@@ -1,6 +1,6 @@
 (function(){
 	
-	angular.module('udd',['udd.core','udd.ebook','udd.login','ui-notification']);
-	
+	angular.module('udd',['udd.core','udd.ebook','udd.login','ui-notification','ui.bootstrap']);
+
 	
 })();

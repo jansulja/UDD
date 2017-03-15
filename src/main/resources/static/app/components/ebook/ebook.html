@@ -2,18 +2,9 @@
 	<div class="row">
 		<div class="col-md-12">
 			<h3 class="text-center">
-				{{ebc.test}} 
-			</h3>
-			<button type="button" class="btn btn-default" aria-label="Left Align">
-  <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
-</button>
-
-<button type="button" class="btn btn-default btn-lg">
-  <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Star
-</button>
-			<input class="form-control" type="text" ng-model="ebc.test" id="ownerName" name="ownerName" required/>
-						    		
-			<table class="table table-bordered table-hover table-condensed">
+				Ebook repository
+			</h3><br/>
+				<table class="table table-bordered table-hover table-condensed">
 				<thead>
 					<tr>
 						<th>
@@ -21,6 +12,9 @@
 						</th>
 						<th>
 							Author
+						</th>
+						<th>
+							Options
 						</th>
 					</tr>
 				</thead>
@@ -30,7 +24,14 @@
 						
 						<td>{{ebook.title}}</td>
 						<td>{{ebook.author}}</td>
-						
+						<td>
+						<button type="button" class="btn btn-default btn-sm">
+  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+</button>
+<button ng-click="ebc.edit(ebook)" type="button" class="btn btn-default btn-sm">
+  <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+</button>
+						</td>
 					
 					</tr>
 				

@@ -8,13 +8,14 @@
 		
 		this.currentUser ={firstname:undefined,lastname:undefined};
 		
-		this.updateCurrentUser = function(){
+		this.updateCurrentUser = function(callback){
 			var that = this.currentUser;
 			Restangular.one("login/current").get().then(function(user){
 				console.log(user);
 				if(user){
 				  that.firstname = user.firstname;
 				  that.lastname = user.lastname;
+				  callback(user.firstname,user.lastname);
 				 }
 			});
 						
