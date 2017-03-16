@@ -4,6 +4,9 @@
 			<h3 class="text-center">
 				Ebook repository
 			</h3><br/>
+
+			<button ng-click="ebc.new()" type="button" class="btn btn-success">Add ebook</button>
+
 				<table class="table table-bordered table-hover table-condensed">
 				<thead>
 					<tr>
@@ -12,6 +15,24 @@
 						</th>
 						<th>
 							Author
+						</th>
+						<th>
+							Keywords
+						</th>
+						<th>
+							Publication year
+						</th>
+						<th>
+							Filename
+						</th>
+						<th>
+							MIME
+						</th>
+						<th>
+							Category
+						</th>
+						<th>
+							Language
 						</th>
 						<th>
 							Options
@@ -24,6 +45,13 @@
 						
 						<td>{{ebook.title}}</td>
 						<td>{{ebook.author}}</td>
+						<td>{{ebook.keywords}}</td>
+						<td>{{ebook.publicationYear}}</td>
+						<td>{{ebook.filename}}</td>
+						<td>{{ebook.mime}}</td>
+						<td>{{ebook.category.name}}</td>
+						<td>{{ebook.language.name}}</td>
+			
 						<td>
 						<button type="button" class="btn btn-default btn-sm">
   <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>

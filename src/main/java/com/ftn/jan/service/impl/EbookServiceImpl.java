@@ -2,9 +2,11 @@ package com.ftn.jan.service.impl;
 
 import java.util.List;
 
+import org.apache.lucene.search.MatchAllDocsQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ftn.jan.ddm.searcher.InformationRetriever;
 import com.ftn.jan.model.Ebook;
 import com.ftn.jan.model.Language;
 import com.ftn.jan.repository.EbookRepository;
@@ -19,7 +21,8 @@ public class EbookServiceImpl implements EbookService {
 	@Override
 	public List<Ebook> findAll() {
 		// TODO Auto-generated method stub
-		return ebookRepository.findAll();
+		//return ebookRepository.findAll();
+		return InformationRetriever.getData(new MatchAllDocsQuery());
 	}
 
 	@Override

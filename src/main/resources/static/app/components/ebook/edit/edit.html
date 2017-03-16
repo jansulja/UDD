@@ -1,6 +1,6 @@
 <form class="state-form form-horizontal" name="edc.form" ng-submit="edc.submitForm()" novalidate>
 	<div class="modal-header">
-	    <h2 class="text-center"> Edit ebook </h2>
+	    <h2 class="text-center"> {{edc.title}} ebook </h2>
 	</div>
 	<div class="modal-body">
 	    <div class="form-group">
@@ -21,7 +21,88 @@
 	    		</div> 
 	        </div>
 	    </div>
+
+	    <div class="form-group">
+	    	<div class="col-sm-8 col-sm-offset-2">
+	    		<label for="keywords" class="col-sm-2 control-label">Keywords</label>
+	    		<div class="col-sm-10">
+	    			<input class="form-control" ng-model-options="{updateOn: 'default blur', debounce: { 'default': 0, 'blur': 0}}" type="text" ng-model="edc.ebook.keywords" id="keywords" name="keywords" placeholder="Keywords"/ required>
+	    			<p class="text-center" ng-show="edc.form.keywords.$touched && edc.form.keywords.$error.required" style="color: red;" >Error Keywords</p>
+	    		</div> 
+	        </div>
+	    </div>
 	   
+		<div class="form-group">
+			    	<div class="col-sm-8 col-sm-offset-2">
+			    		<label for="publicationYear" class="col-sm-2 control-label">Publication year</label>
+			    		<div class="col-sm-10">
+			    			<input class="form-control" ng-model-options="{updateOn: 'default blur', debounce: { 'default': 0, 'blur': 0}}" type="number" ng-model="edc.ebook.publicationYear" id="publicationYear" name="publicationYear" placeholder="Publication year"/ required>
+			    			<p class="text-center" ng-show="edc.form.publicationYear.$touched && edc.form.publicationYear.$error.required" style="color: red;" >Error Publication year</p>
+			    		</div> 
+			        </div>
+			    </div>
+		<div class="form-group">
+	    	<div class="col-sm-8 col-sm-offset-2">
+	    		<label for="filename" class="col-sm-2 control-label">Filename</label>
+	    		<div class="col-sm-10">
+	    			<input class="form-control" ng-model-options="{updateOn: 'default blur', debounce: { 'default': 0, 'blur': 0}}" type="text" ng-model="edc.ebook.filename" id="filename" name="filename" placeholder="Filename"/ required>
+	    			<p class="text-center" ng-show="edc.form.filename.$touched && edc.form.filename.$error.required" style="color: red;" >Error Filename</p>
+	    		</div> 
+	        </div>
+	    </div>
+
+	    		<div class="form-group">
+	    	<div class="col-sm-8 col-sm-offset-2">
+	    		<label for="mime" class="col-sm-2 control-label">MIME</label>
+	    		<div class="col-sm-10">
+	    			<input  class="form-control" ng-model-options="{updateOn: 'default blur', debounce: { 'default': 0, 'blur': 0}}" type="text" ng-model="edc.ebook.mime" id="mime" name="mime" placeholder="MIME" disabled />
+	    			<p class="text-center" ng-show="edc.form.mime.$touched && edc.form.mime.$error.required" style="color: red;" >Error MIME</p>
+	    		</div> 
+	        </div>
+	    </div>
+
+
+	    <div class="form-group">
+	    	<div class="col-sm-8 col-sm-offset-2">
+	    		<label for="category" class="col-sm-2 control-label">Category</label>
+	    		<div class="col-sm-10">
+	    			<select class="form-control" name="category"  ng-options="category.name for category in edc.categories track by category.name" ng-model="edc.ebook.category" required>
+	    			</select>	
+	    			<p class="text-center" ng-show="edc.form.category.$touched && edc.form.category.$error.required" style="color: red;" >Error Category</p>
+	    		</div> 
+	    	</div>
+	    </div>
+
+	   
+	     <div class="form-group">
+	    	<div class="col-sm-8 col-sm-offset-2">
+	    		<label for="language" class="col-sm-2 control-label">Language</label>
+	    		<div class="col-sm-10">
+	    			<select class="form-control" name="language" ng-options="language.name for language in edc.languages track by language.name" ng-model="edc.ebook.language" required>
+	    			</select>	
+	    			<p class="text-center" ng-show="edc.form.language.$touched && edc.form.language.$error.required" style="color: red;" >Error Language</p>
+	    		</div> 
+	    	</div>
+	    </div>
+
+
+
+	    
+
+	    	<div class="form-group">
+	    	<div class="col-sm-8 col-sm-offset-2">
+	    		<label for="file" class="col-sm-2 control-label">File</label>
+	    		<div class="col-sm-10">
+	    			<input class="form-control" ng-model-options="{updateOn: 'default blur', debounce: { 'default': 0, 'blur': 0}}" type="file" ng-model="edc.ebook.file" onchange="angular.element(this).scope().edc.upload(this.files)" id="file" name="file" placeholder="File"/>
+	    		<!-- 	<p class="text-center" ng-show="edc.form.file.$touched && edc.form.file.$error.required" style="color: red;" >Error File</p>
+	    		 -->	
+	    			
+	    		
+	    		</div> 
+	    		
+	        </div>
+	    </div>
+
 	</div>
 	<div class="modal-footer">
 		<div class="text-center">

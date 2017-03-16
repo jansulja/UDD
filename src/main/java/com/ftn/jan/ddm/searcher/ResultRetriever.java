@@ -25,7 +25,7 @@ import com.ftn.jan.ddm.analyzer.SerbianAnalyzer;
 
 public class ResultRetriever {
 	
-	private static int maxHits = 10;
+	private static int maxHits = 100;
 	private static final Version matchVersion = Version.LUCENE_4_9;
 	private static Analyzer analyzer = new SerbianAnalyzer(matchVersion);
 	private static QueryParser queryParser = new QueryParser(matchVersion, "", analyzer);

@@ -7,6 +7,8 @@ import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.stream.Stream;
 
@@ -36,6 +38,9 @@ public class FileSystemStorageService implements StorageService {
             if (file.isEmpty()) {
                 throw new StorageException("Failed to store empty file " + file.getOriginalFilename());
             }
+            
+          
+            
             if(Files.notExists(this.rootLocation.resolve(file.getOriginalFilename()))){
             	//Files.createDirectory(this.rootLocation.resolve(file.getOriginalFilename()));
             	File temp = new File(ResourceBundle.getBundle("index").getString("docs"));
@@ -105,7 +110,7 @@ public class FileSystemStorageService implements StorageService {
         return convFile;
     }
     
-    private File convert(MultipartFile file)
+    public static File convert(MultipartFile file)
     {    
         File convFile = new File(file.getOriginalFilename());
         try {
@@ -128,17 +133,29 @@ public class FileSystemStorageService implements StorageService {
 	            if (file.isEmpty()) {
 	                throw new StorageException("Failed to store empty file " + file.getOriginalFilename());
 	            }
-	            if(Files.notExists(this.rootLocation.resolve(file.getOriginalFilename()))){
+	            
+	            String filename = addTimestampToFilename(file.getOriginalFilename());
+	            ebook.setFilename(filename);
+	            if(Files.notExists(this.rootLocation.resolve(filename))){
 	            	//Files.createDirectory(this.rootLocation.resolve(file.getOriginalFilename()));
 	            	File temp = new File(ResourceBundle.getBundle("index").getString("docs"));
 	            	boolean succ = temp.mkdirs();
 	            }
 	            
-	            Files.copy(file.getInputStream(), this.rootLocation.resolve(file.getOriginalFilename()));
+	            Files.copy(file.getInputStream(), this.rootLocation.resolve(filename));
 	            IndexManager.getIndexer().index(convert(file),ebook);
 	        } catch (IOException e) {
 	            throw new StorageException("Failed to store file " + file.getOriginalFilename(), e);
 	        }
+	}
+	
+	private String addTimestampToFilename(String filename){
+		
+		String[] parts= filename.split("\\.");
+		SimpleDateFormat sdf = new SimpleDateFormat("dd_MM_yyyy_HH_mm_ss");
+		return parts[0] + "_" + sdf.format(new Date()) + "." + parts[1] ;
+		
+		
 	}
     
 }

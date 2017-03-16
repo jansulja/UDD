@@ -14,8 +14,10 @@ public class EbookRepositoryImpl implements EbookRepository {
 
 	@Override
 	public List<Ebook> findAll() {
-		
-		 return InformationRetriever.getData(new MatchAllDocsQuery());
+
+		List<Ebook> ebooks = InformationRetriever.getData(new MatchAllDocsQuery());
+
+		return ebooks;
 	}
 
 }
