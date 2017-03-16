@@ -5,6 +5,8 @@ import java.util.List;
 import com.ftn.jan.model.Ebook;
 import com.ftn.jan.model.Language;
 
+import javassist.NotFoundException;
+
 public interface EbookService {
 
 	public List<Ebook> findAll();
@@ -16,7 +18,7 @@ public interface EbookService {
 	public List<Ebook> findByLanguage(Language language);
 	public Ebook findByEbookId(Long ebookId);
 	public void updateBook(Ebook oldEbook,Ebook newEbook);
-	public void delete(Long ebookId);
+	public void delete(Long ebookId) throws NotFoundException;
 	
 	
 }

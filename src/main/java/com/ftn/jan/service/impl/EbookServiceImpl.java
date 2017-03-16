@@ -25,6 +25,8 @@ import com.ftn.jan.model.Language;
 import com.ftn.jan.repository.EbookRepository;
 import com.ftn.jan.service.EbookService;
 
+import javassist.NotFoundException;
+
 @Service
 public class EbookServiceImpl implements EbookService {
 
@@ -156,11 +158,15 @@ public class EbookServiceImpl implements EbookService {
 	}
 
 	@Override
-	public void delete(Long ebookId) {
+	public void delete(Long ebookId) throws NotFoundException {
 		// TODO Auto-generated method stub
 		Query q = new TermQuery(new Term("ebookId", ebookId.toString()));
-		//Document doc = ResultRetriever.getResults(q).get(0);
+		List<Document> doc = ResultRetriever.getResults(q);
 		IndexManager.getIndexer().deleteDocuments(q);
+		
+		if(doc.isEmpty()){
+			throw new NotFoundException("Ebook requested for deletion not found.");
+		}
 		
 	}
 	

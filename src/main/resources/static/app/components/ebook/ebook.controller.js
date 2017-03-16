@@ -10,10 +10,13 @@
 		var ebc = this;
 		
 		ebc.init = function(){
-			Restangular.all('ebook/list').getList()  // GET: /ebooks
+			Restangular.all('ebook/list').getList()
 			.then(function(ebooks) {
-		  // returns a list of users
-		  ebc.ebooks = ebooks; // first Restangular obj in list: { id: 123 }
+		  
+		  ebc.ebooks = ebooks; 
+		  if(ebooks.length==0){
+		  	Notification('Ebook repository is empty.');
+		  }
 		  
 		})
 		}
@@ -24,9 +27,9 @@
 		ebc.edit = function(ebook){
 			
 			editModal.edit(ebook).then(function(data) {
-						if(data){
-							ebc.init();
-						}
+				if(data){
+					ebc.init();
+				}
 			});
 			
 		}
@@ -42,18 +45,15 @@
 		ebc.delete = function(id){
 
 			$http.delete("ebook/delete/"+id)
-						.then(function(success){
-							
-							Notification.success({message: 'Edit successfull', delay: 5000});
-						},function(error){
-							Notification.error({message: 'Edit error', delay: 3000});
-						});
+			.then(function(success){
+				
+				Notification.success({message: 'Ebook deleted', delay: 5000});
+				ebc.init();
+			},function(error){
+				Notification.error({message: 'Ebook delete failed', delay: 3000});
+			});
 
-			// $http('DELETE', 'ebook/delete/'+id, function(status, response){
-			// 	// success
-			// }, function(status, response){
-			// 	// error
-			// });
+			
 
 		}
 

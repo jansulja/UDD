@@ -21,6 +21,8 @@ import com.ftn.jan.util.FileSystemStorageService;
 import com.ftn.jan.util.StorageService;
 import com.ftn.jan.viewmodel.EbookViewModel;
 
+import javassist.NotFoundException;
+
 @RestController
 @RequestMapping("ebook")
 public class EbookController {
@@ -44,7 +46,7 @@ public class EbookController {
 	}
 	
 	@RequestMapping(path = "/edit", method = RequestMethod.POST,consumes = {"multipart/form-data"})
-	public void edit(@RequestPart("ebook") EbookViewModel ebook,@RequestPart(name="file",required=false) MultipartFile file) {
+	public void edit(@RequestPart("ebook") EbookViewModel ebook,@RequestPart(name="file",required=false) MultipartFile file) throws NotFoundException {
 
 		if(file==null){
 			Ebook ebookToUpdate = ebookService.findByEbookId(ebook.getEbookId());
@@ -67,7 +69,7 @@ public class EbookController {
 	}
 	
 	@DeleteMapping(value="delete/{ebookId}")
-	public void delete(@PathVariable("ebookId") Long ebookId){
+	public void delete(@PathVariable("ebookId") Long ebookId) throws NotFoundException{
 		ebookService.delete(ebookId);
 	};
 	
