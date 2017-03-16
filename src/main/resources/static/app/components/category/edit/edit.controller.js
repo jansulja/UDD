@@ -15,7 +15,7 @@
 
 			if(items.status === 'edit'){
 
-				
+				ecc.category = items.category;
 
 			}else{
 
@@ -35,7 +35,12 @@
 
 			if(items.status === 'edit'){
 
-				
+				ecc.category.put().then(function(){
+					Notification.success({message: 'Done', delay: 3000 });
+					$uibModalInstance.close(ecc.category);
+				},function(){
+					Notification.error({message: 'Error updating category', delay: 3000});
+				});
 
 			}else{
 
@@ -43,7 +48,7 @@
 					Notification.success({message: 'Done', delay: 3000 });
 					$uibModalInstance.close(ecc.category);
 				},function(){
-					Notification.success({message: 'Error creating category', delay: 3000});
+					Notification.error({message: 'Error creating category', delay: 3000});
 				});
 				
 			}
