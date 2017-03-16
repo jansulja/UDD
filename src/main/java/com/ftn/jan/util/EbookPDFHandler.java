@@ -10,7 +10,7 @@ import com.ftn.jan.model.Ebook;
 
 public class EbookPDFHandler {
 
-	public static Ebook createEbookFromPDF(File file){
+	public static Ebook createEbookFromPDF(File file,Long ebookId){
 		
 		PDFHandler pdfHandler = new PDFHandler();
 		Document document = null;
@@ -24,7 +24,11 @@ public class EbookPDFHandler {
 		Ebook ebook = new Ebook();
 		ebook.setAuthor(document.get("author"));
 		ebook.setTitle(document.get("title"));
-		
+		if(ebookId!=null){
+			ebook.setEbookId(ebookId);
+		}else{
+			ebook.setEbookId(System.currentTimeMillis());
+		}
 		String[] allKeywords = document.getValues("keyword");
 		String 	temp = "";
 		for(String keyword : allKeywords){

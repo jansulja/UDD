@@ -3,9 +3,9 @@
 	angular.module('udd.ebook')
 	.controller('EbookController',EbookController);
 	
-	EbookController.$inject = ['Restangular','editModal','Notification'];
+	EbookController.$inject = ['Restangular','editModal','Notification','$http'];
 	
-	function EbookController(Restangular,editModal,Notification){
+	function EbookController(Restangular,editModal,Notification,$http){
 		
 		var ebc = this;
 		
@@ -24,7 +24,9 @@
 		ebc.edit = function(ebook){
 			
 			editModal.edit(ebook).then(function(data) {
-						Notification.success({message: 'done', delay: 3000});
+						if(data){
+							ebc.init();
+						}
 			});
 			
 		}
@@ -35,6 +37,24 @@
 				ebc.init();
 			});
 			
+		}
+
+		ebc.delete = function(id){
+
+			$http.delete("ebook/delete/"+id)
+						.then(function(success){
+							
+							Notification.success({message: 'Edit successfull', delay: 5000});
+						},function(error){
+							Notification.error({message: 'Edit error', delay: 3000});
+						});
+
+			// $http('DELETE', 'ebook/delete/'+id, function(status, response){
+			// 	// success
+			// }, function(status, response){
+			// 	// error
+			// });
+
 		}
 
 		ebc.init();

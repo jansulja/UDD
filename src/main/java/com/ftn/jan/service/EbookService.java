@@ -14,7 +14,9 @@ public interface EbookService {
 	public List<Ebook> findByKeyword(String keyword);
 	public List<Ebook> findByContent(String content);
 	public List<Ebook> findByLanguage(Language language);
-	
+	public Ebook findByEbookId(Long ebookId);
+	public void updateBook(Ebook oldEbook,Ebook newEbook);
+	public void delete(Long ebookId);
 	
 	
 }

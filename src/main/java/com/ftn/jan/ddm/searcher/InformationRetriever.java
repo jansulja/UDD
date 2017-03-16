@@ -66,6 +66,9 @@ public class InformationRetriever {
 			data.setCategory(categoryRepository.findByName(doc.get("category")));
 			data.setLanguage(languageRepository.findByName(doc.get("language")));
 			
+			String stringId = doc.get("ebookId");
+			Long longId = (stringId==null)? 0: Long.valueOf(stringId);
+			data.setEbookId(longId);
 			
 			
 			temp = "";

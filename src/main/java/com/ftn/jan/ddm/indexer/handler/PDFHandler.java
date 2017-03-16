@@ -109,6 +109,7 @@ public class PDFHandler extends DocumentHandler {
 	public Document getDocument(File file, EbookViewModel ebook) throws IncompleteIndexDocumentException {
 		// TODO Auto-generated method stub
 		Document doc = getDocument(file);
+		doc.add(new TextField("ebookId", ebook.getEbookId().toString(), Store.YES));
 		doc.add(new TextField("publicationYear", ebook.getPublicationYear().toString(), Store.YES));
 		doc.add(new TextField("mime", ebook.getMime(), Store.YES));
 		doc.add(new TextField("filename", ebook.getFilename(), Store.YES));

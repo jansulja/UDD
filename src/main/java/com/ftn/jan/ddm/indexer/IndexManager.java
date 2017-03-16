@@ -2,11 +2,12 @@ package com.ftn.jan.ddm.indexer;
 
 public class IndexManager {
 	
-	private static UDDIndexer indexer = new UDDIndexer(false);
+	private static boolean restartIndex = false;
+	private static UDDIndexer indexer = new UDDIndexer(restartIndex);
 	
 	public static UDDIndexer getIndexer(){
 		if(indexer == null){
-			indexer = new UDDIndexer(false);
+			indexer = new UDDIndexer(restartIndex);
 		}
 		return indexer;
 	}

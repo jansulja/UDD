@@ -13,7 +13,7 @@ public class Ebook {
 	@javax.persistence.Id
 	@org.springframework.data.annotation.Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer ebookId;
+	private Long ebookId;
 
 	@Column(length = 80, nullable = false)
 	private String title;
@@ -47,10 +47,10 @@ public class Ebook {
 	public void setLanguage(Language language) {
 		this.language = language;
 	}
-	public Integer getEbookId() {
+	public Long getEbookId() {
 		return ebookId;
 	}
-	public void setEbookId(Integer ebookId) {
+	public void setEbookId(Long ebookId) {
 		this.ebookId = ebookId;
 	}
 	public String getTitle() {

@@ -116,13 +116,12 @@ public final class UDDIndexer {
 	 * @return true if update was successful, othewise false
 	 */
 	public boolean updateDocument(Document doc, IndexableField... fields){
-		String location = doc.get("location");
 		replaceFields(doc, fields);
 		
 		try{
 			synchronized (this) {
 				openIndexWriter();
-				this.indexWriter.updateDocument(new Term("location", location), doc);
+				this.indexWriter.updateDocument(new Term("ebookId", doc.get("ebookId")), doc);
 				this.indexWriter.forceMergeDeletes();
 				this.indexWriter.deleteUnusedFiles();
 				this.indexWriter.commit();
@@ -133,6 +132,15 @@ public final class UDDIndexer {
 			return false;
 		}
 	}
+	
+//	public void updateDocument(Document doc, IndexableField... fields){
+//		deleteDocument(doc);
+//		replaceFields(doc, fields);
+//		addDocument(doc);
+//	
+//	}
+	
+	
 	
 	public void replaceFields(Document doc, IndexableField... fields){
 		for(IndexableField field : fields){

@@ -49,6 +49,7 @@ public class FileSystemStorageService implements StorageService {
             
             Files.copy(file.getInputStream(), this.rootLocation.resolve(file.getOriginalFilename()));
             IndexManager.getIndexer().index(convert(file));
+           
         } catch (IOException e) {
             throw new StorageException("Failed to store file " + file.getOriginalFilename(), e);
         }
@@ -136,6 +137,8 @@ public class FileSystemStorageService implements StorageService {
 	            
 	            String filename = addTimestampToFilename(file.getOriginalFilename());
 	            ebook.setFilename(filename);
+	            
+	            
 	            if(Files.notExists(this.rootLocation.resolve(filename))){
 	            	//Files.createDirectory(this.rootLocation.resolve(file.getOriginalFilename()));
 	            	File temp = new File(ResourceBundle.getBundle("index").getString("docs"));
@@ -143,7 +146,8 @@ public class FileSystemStorageService implements StorageService {
 	            }
 	            
 	            Files.copy(file.getInputStream(), this.rootLocation.resolve(filename));
-	            IndexManager.getIndexer().index(convert(file),ebook);
+	            File uploadedFile = new File(this.rootLocation.resolve(filename).toString());
+	            IndexManager.getIndexer().index(uploadedFile,ebook);
 	        } catch (IOException e) {
 	            throw new StorageException("Failed to store file " + file.getOriginalFilename(), e);
 	        }
