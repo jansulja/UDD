@@ -20,4 +20,23 @@ public class CategoryServiceImpl implements CategoryService {
 		return categoryRepository.findAll();
 	}
 
+	@Override
+	public void save(Category category) {
+		// TODO Auto-generated method stub
+		categoryRepository.save(category);
+	}
+
+	@Override
+	public void update(Category category) {
+
+		categoryRepository.save(category);
+		
+	}
+
+	@Override
+	public void remove(Integer categoryId) {
+		// TODO Auto-generated method stub
+		categoryRepository.delete(categoryId);
+	}
+
 }

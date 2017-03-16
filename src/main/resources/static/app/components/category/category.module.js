@@ -5,6 +5,6 @@
 */
  (function(){
 
-	 angular.module('udd.category', []); 
+	 angular.module('udd.category', ['udd.category.edit','ui.router','restangular']); 
 
 })(); 
