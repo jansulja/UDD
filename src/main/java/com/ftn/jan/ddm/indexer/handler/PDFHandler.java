@@ -102,6 +102,8 @@ public class PDFHandler extends DocumentHandler {
 			throw new IncompleteIndexDocumentException(error.trim());
 		}
 		
+		
+		
 		return doc;
 	}
 
