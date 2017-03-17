@@ -1,0 +1,47 @@
+<div class="row">
+	<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-lg-offset-2">
+		<h3>User Profile</h3>
+		<br/>
+	</div>
+
+</div>
+
+<div class="row">
+	<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-lg-offset-2">
+		
+
+		
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title">Details</h3>
+				</div>
+				<div class="panel-body">
+					
+				<ul class="list-group">
+					<li class="list-group-item">Firstname : {{udc.user.firstname}}</li>
+					<li class="list-group-item" >Lastname : {{udc.user.lastname}}</li>
+					<li class="list-group-item" >Username : {{udc.user.username}}</li>
+					<li class="list-group-item" >Type : {{udc.user.type}}</li>
+					<li class="list-group-item"  ng-show="udc.user.type==='pretplatnik'">Category : {{(udc.user.category ? udc.user.category.name :'All' )}}</li>
+
+				</ul>
+
+				</div>
+			</div>
+
+			<div class="panel panel-danger">
+				<div class="panel-heading">
+					<h3 class="panel-title"><span class="glyphicon glyphicon-cog"></span>&nbsp Settings</h3>
+				</div>
+				<div class="panel-body">
+					<button ng-click="udc.edit()" type="button" class="btn btn-sm btn-danger">Edit profile</button>
+
+					<button ng-click="udc.changePassword()" type="button" class="btn btn-sm btn-danger">Change password</button>
+				</div>
+			</div>
+			
+		
+
+	</div>
+
+</div>

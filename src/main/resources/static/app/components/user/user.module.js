@@ -5,6 +5,6 @@
 */
  (function(){
 
-	 angular.module('udd.user', ['udd.user.edit','ui.router','restangular']); 
+	 angular.module('udd.user', ['udd.user.edit','udd.user.details','ui.router','restangular']); 
 
 })(); 

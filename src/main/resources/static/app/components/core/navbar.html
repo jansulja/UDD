@@ -35,7 +35,7 @@
 					</form>
 					<ul class="nav navbar-nav navbar-right">
 						<li ng-show="coc.currentUser.firstname">
-							<a style="color: green;" href="#"><i> {{coc.currentUser.firstname + " " + coc.currentUser.lastname}}</i></a>
+							<a style="color: green;" ui-sref="details"><i> {{coc.currentUser.firstname + " " + coc.currentUser.lastname}}</i></a>
 						</li>
 						<li ng-show="coc.currentUser.firstname">
 							<a href="#" ng-click="coc.logout()"><b>Logout</b></a>

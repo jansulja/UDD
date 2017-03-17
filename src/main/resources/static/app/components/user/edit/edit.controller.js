@@ -26,6 +26,9 @@
 				euc.user = items.user;
 				euc.status = 'edit';
 
+			}else if(items.status === 'editProfile'){
+				euc.user = items.user;
+				euc.status = 'editProfile';
 			}else{
 
 				euc.user = {};

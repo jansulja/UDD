@@ -5,10 +5,10 @@
 	<div class="modal-body">
 	    <div class="form-group">
 	    	<div class="col-sm-8 col-sm-offset-2">
-	    		<label for="firstname" class="col-sm-2 control-label">Username</label>
+	    		<label for="firstname" class="col-sm-2 control-label">Firstname</label>
 	    		<div class="col-sm-10">
-	    			<input class="form-control" ng-model-options="{updateOn: 'default blur', debounce: { 'default': 0, 'blur': 0}}" type="text" ng-model="euc.user.firstname" id="firstname" name="firstname" placeholder="Username"/ required>
-	    			<p class="text-center" ng-show="euc.form.firstname.$touched && euc.form.firstname.$error.required" style="color: red;" >Error Username</p>
+	    			<input class="form-control" ng-model-options="{updateOn: 'default blur', debounce: { 'default': 0, 'blur': 0}}" type="text" ng-model="euc.user.firstname" id="firstname" name="firstname" placeholder="Firstname"/ required>
+	    			<p class="text-center" ng-show="euc.form.firstname.$touched && euc.form.firstname.$error.required" style="color: red;" >Error Firstname</p>
 	    		</div> 
 	        </div>
 	    </div>
@@ -23,7 +23,7 @@
 	        </div>
 	    </div>
 
-	    <div class="form-group">
+	    <div class="form-group" ng-hide="euc.status==='editProfile'">
 	    	<div class="col-sm-8 col-sm-offset-2">
 	    		<label for="username" class="col-sm-2 control-label">Username</label>
 	    		<div class="col-sm-10">
@@ -33,7 +33,7 @@
 	        </div>
 	    </div>
 
-	    <div class="form-group">
+	    <div class="form-group" ng-hide="euc.status==='editProfile'">
 	    	<div class="col-sm-8 col-sm-offset-2">
 	    		<label for="password" class="col-sm-2 control-label">Password</label>
 	    		<div class="col-sm-10">
@@ -43,7 +43,7 @@
 	        </div>
 	    </div>
 
-	     <div class="form-group">
+	     <div class="form-group" ng-hide="euc.status==='editProfile'">
 	    	<div class="col-sm-8 col-sm-offset-2">
 	    		<label for="type" class="col-sm-2 control-label">Type</label>
 	    		<div class="col-sm-10">
@@ -54,7 +54,7 @@
 	    	</div>
 	    </div>
 
-	    <div class="form-group" ng-show="euc.user.type ==='pretplatnik'">
+	    <div class="form-group" ng-show="euc.user.type ==='pretplatnik'" ng-hide="euc.status==='editProfile'">
 	    	<div class="col-sm-8 col-sm-offset-2">
 	    		<label for="category" class="col-sm-2 control-label">Category</label>
 	    		<div class="col-sm-10">

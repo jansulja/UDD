@@ -9,7 +9,8 @@
 	function editUserModal($uibModal, User) {
 		return {
 			open: openUserModal,
-			edit: editUserModal
+			edit: editUserModal,
+			editProfile: editUserProfileModal
 		};
 
 		function openUserModal() {
@@ -44,6 +45,28 @@
 						return {
 							user: user,
 							status: 'edit'
+						}
+					}
+				}
+			});
+			
+			return modalInstance.result.then(function(editUser) {
+				//return editUser.put();
+				return editUser;
+			});
+		}
+
+		function editUserProfileModal(user){
+			var modalInstance = $uibModal.open({
+				animation: true,
+				templateUrl: 'app/components/user/edit/edit.html',
+				controller: 'EditUserController',
+				controllerAs: 'euc',
+				resolve:{
+					items: function(){
+						return {
+							user: user,
+							status: 'editProfile'
 						}
 					}
 				}

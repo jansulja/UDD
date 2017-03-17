@@ -11,7 +11,7 @@
 		this.updateCurrentUser = function(callback){
 			var that = this.currentUser;
 			Restangular.one("login/current").get().then(function(user){
-				console.log(user);
+				
 				if(user){
 				  that.firstname = user.firstname;
 				  that.lastname = user.lastname;
@@ -53,12 +53,12 @@
 			    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 			})
 			.then(function(response) {
-				console.log('Login succeed.. bitch');
+				
 				that.firstname = response.data.firstname;
 				that.lastname = response.data.lastname;
 				success();
 			},function(response) {
-				console.log('Login failed');
+				
 				error(response.data);
 			});			
 			
