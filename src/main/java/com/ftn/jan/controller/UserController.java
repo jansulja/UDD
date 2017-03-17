@@ -4,14 +4,18 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ftn.jan.model.Category;
 import com.ftn.jan.model.User;
 import com.ftn.jan.service.UserService;
 import com.ftn.jan.viewmodel.ChangePasswordViewModel;
@@ -25,12 +29,43 @@ public class UserController {
 	UserService userService;
 	
 	
+	@GetMapping
+	public List<User> list(){
+		
+		return userService.findAll();
+		
+	}
+	
 	@GetMapping("list")
 	public List<User> findAll(){
 		
 		return userService.findAll();
 		
 	}
+	
+	@PostMapping
+	public void insert(@RequestBody User user){
+		
+		userService.save(user);
+		
+	}
+	
+	@GetMapping("/{categoryId}")
+	public User details(@PathVariable(value="userId") Integer userId) {
+		return userService.findByUserId(userId);
+	};
+	
+	@PutMapping
+	public void update(@RequestBody User user){
+		userService.update(user);
+	}
+	
+	@DeleteMapping("/{userId}")
+	public void delete(@PathVariable(value="userId") Integer userId) {
+		userService.remove(userId);
+	};
+	
+	
 	
 	@PostMapping("updateProfile")
 	public void updateProfile(@RequestBody UserViewModel userViewModel){
@@ -64,13 +99,13 @@ public class UserController {
 		
 	}
 	
-	@RequestMapping(method = RequestMethod.GET)
-	//@ResponseBody
-	@PreAuthorize("hasRole('USER')")
-	public String changePassword(){
-		userService.changePassword("jkdjlsd");
-		return "dasdkasd";
-	}
+//	@RequestMapping(method = RequestMethod.GET)
+//	//@ResponseBody
+//	@PreAuthorize("hasRole('USER')")
+//	public String changePassword(){
+//		userService.changePassword("jkdjlsd");
+//		return "dasdkasd";
+//	}
 	
 	//Testing roles
 	@GetMapping(value="/admin")

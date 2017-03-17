@@ -1,0 +1,77 @@
+<form class="state-form form-horizontal" name="euc.form" ng-submit="euc.submitForm()" novalidate>
+	<div class="modal-header">
+	    <h2 class="text-center"> {{euc.title}} user </h2>
+	</div>
+	<div class="modal-body">
+	    <div class="form-group">
+	    	<div class="col-sm-8 col-sm-offset-2">
+	    		<label for="firstname" class="col-sm-2 control-label">Username</label>
+	    		<div class="col-sm-10">
+	    			<input class="form-control" ng-model-options="{updateOn: 'default blur', debounce: { 'default': 0, 'blur': 0}}" type="text" ng-model="euc.user.firstname" id="firstname" name="firstname" placeholder="Username"/ required>
+	    			<p class="text-center" ng-show="euc.form.firstname.$touched && euc.form.firstname.$error.required" style="color: red;" >Error Username</p>
+	    		</div> 
+	        </div>
+	    </div>
+
+	    <div class="form-group">
+	    	<div class="col-sm-8 col-sm-offset-2">
+	    		<label for="lastname" class="col-sm-2 control-label">Lastname</label>
+	    		<div class="col-sm-10">
+	    			<input class="form-control" ng-model-options="{updateOn: 'default blur', debounce: { 'default': 0, 'blur': 0}}" type="text" ng-model="euc.user.lastname" id="lastname" name="lastname" placeholder="Lastname"/ required>
+	    			<p class="text-center" ng-show="euc.form.lastname.$touched && euc.form.lastname.$error.required" style="color: red;" >Error Lastname</p>
+	    		</div> 
+	        </div>
+	    </div>
+
+	    <div class="form-group">
+	    	<div class="col-sm-8 col-sm-offset-2">
+	    		<label for="username" class="col-sm-2 control-label">Username</label>
+	    		<div class="col-sm-10">
+	    			<input class="form-control" ng-disabled="euc.status === 'edit'" ng-model-options="{updateOn: 'default blur', debounce: { 'default': 0, 'blur': 0}}" type="text" ng-model="euc.user.username" id="username" name="username" placeholder="Username"/ required>
+	    			<p class="text-center" ng-show="euc.form.username.$touched && euc.form.username.$error.required" style="color: red;" >Error Username</p>
+	    		</div> 
+	        </div>
+	    </div>
+
+	    <div class="form-group">
+	    	<div class="col-sm-8 col-sm-offset-2">
+	    		<label for="password" class="col-sm-2 control-label">Password</label>
+	    		<div class="col-sm-10">
+	    			<input class="form-control" ng-disabled="euc.status === 'edit'" ng-model-options="{updateOn: 'default blur', debounce: { 'default': 0, 'blur': 0}}" type="password" ng-model="euc.user.password" id="password" name="password" placeholder="Password"/ required>
+	    			<p class="text-center" ng-show="euc.form.password.$touched && euc.form.password.$error.required" style="color: red;" >Error Password</p>
+	    		</div> 
+	        </div>
+	    </div>
+
+	     <div class="form-group">
+	    	<div class="col-sm-8 col-sm-offset-2">
+	    		<label for="type" class="col-sm-2 control-label">Type</label>
+	    		<div class="col-sm-10">
+	    			<select class="form-control" name="type"  ng-options="type as type for type in euc.types track by type" ng-model="euc.user.type" required>
+	    			</select>	
+	    			<p class="text-center" ng-show="euc.form.type.$touched && euc.form.type.$error.required" style="color: red;" >Error Type</p>
+	    		</div> 
+	    	</div>
+	    </div>
+
+	    <div class="form-group" ng-show="euc.user.type ==='pretplatnik'">
+	    	<div class="col-sm-8 col-sm-offset-2">
+	    		<label for="category" class="col-sm-2 control-label">Category</label>
+	    		<div class="col-sm-10">
+	    			<select class="form-control" name="category"  ng-options="category.name for category in euc.categories track by category.name" ng-model="euc.user.category" required>
+	    			</select>	
+	    			<p class="text-center" ng-show="euc.form.category.$touched && euc.form.category.$error.required" style="color: red;" >Error Category</p>
+	    		</div> 
+	    	</div>
+	    </div>
+
+	    
+
+	</div>
+	<div class="modal-footer">
+		<div class="text-center">
+		    <button class="btn btn-success" type="submit" ng-disabled="euc.form.$invalid">Save</button>
+		    <button class="btn btn-warning" type="button" id="cancelButton" ng-click="euc.cancel()">Cancel</button>
+		</div>
+	</div>
+</form>

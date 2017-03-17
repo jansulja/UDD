@@ -128,6 +128,36 @@ public class UserServiceImpl implements UserService {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
 	}
+
+
+
+	@Override
+	public void update(User user) {
+		// TODO Auto-generated method stub
+		userRepository.save(user);
+	}
+
+
+	@Override
+	public User findByUserId(Integer userId) {
+		// TODO Auto-generated method stub
+		return userRepository.findOne(userId);
+	}
+
+
+	@Override
+	public void save(User user) {
+		
+		userRepository.save(user);
+		
+	}
+
+
+	@Override
+	public void remove(Integer userId) {
+		// TODO Auto-generated method stub
+		userRepository.delete(userId);
+	}
 	
 	
 

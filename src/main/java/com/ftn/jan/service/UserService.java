@@ -21,6 +21,10 @@ public interface UserService {
 	public boolean changePassword(ChangePasswordViewModel changePasswordViewModel);
 	public void updateProfile(UserViewModel userViewModel);
 	public void logout();
+	public User findByUserId(Integer userId);
+	public void update(User user);
+	public void save(User user);
+	public void remove(Integer userId);
 	
 	
 }

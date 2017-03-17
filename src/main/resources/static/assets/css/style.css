@@ -1,0 +1,20 @@
+.td_user_type_admin{
+
+	font-weight: bold;
+	color: red;
+
+}
+
+.td_user_type_sub_cat{
+
+	font-weight: bold;
+	color: orange;
+
+}
+
+.td_user_type_sub{
+
+	font-weight: bold;
+	color: green;
+
+}

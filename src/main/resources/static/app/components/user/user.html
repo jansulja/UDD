@@ -1,0 +1,58 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<h3 class="text-center">
+				User repository
+			</h3><br/>
+
+			<button ng-click="usc.create()" type="button" class="btn btn-success">Add user</button>
+
+			<table class="table table-bordered table-hover table-condensed">
+				<thead>
+					<tr>
+						
+						<th>
+							Firstname
+						</th>
+						<th>Lastname</th>
+						<th>Username</th>
+						<th>Type</th>
+						<th>Category</th>
+						<th>Options</th>
+
+						
+					</tr>
+				</thead>
+				<tbody>
+
+					<tr ng-repeat="user in usc.users">
+						
+						<td>{{user.firstname}}</td>
+						<td>{{user.lastname}}</td>
+						<td>{{user.username}}</td>
+						<td ng-class="{td_user_type_admin: usc.getUserType(user)==='admin',
+									td_user_type_sub_cat: usc.getUserType(user)==='sub_cat',
+									td_user_type_sub: usc.getUserType(user)==='sub'}">
+							{{user.type}}
+						</td>
+						<td>{{user.category.name}}</td>
+
+						
+
+						<td>
+							<button ng-click="usc.delete(user)" type="button" class="btn btn-default btn-sm">
+								<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+							</button>
+							<button ng-click="usc.edit(user)" type="button" class="btn btn-default btn-sm">
+								<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+							</button>
+						</td>
+
+					</tr>
+
+
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
