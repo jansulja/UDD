@@ -40,3 +40,4 @@ nbdist/
 ### My folders ###
 
 data/
+*.pdf

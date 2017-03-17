@@ -3,9 +3,9 @@
 	angular.module('udd.core')
 		.controller('CoreController',CoreController);
 	
-	CoreController.$inject = ['LoginService','$state'];
+	CoreController.$inject = ['LoginService','$state','searchModal'];
 	
-	function CoreController(LoginService,$state){
+	function CoreController(LoginService,$state,searchModal){
 		
 		var coc = this;
 		coc.currentUser ={firstname:undefined,lastname:undefined};
@@ -34,6 +34,12 @@
 				$state.go('login');
 			
 			
+		}
+
+		coc.search = function(){
+			searchModal.open().then(function(data) {
+				
+			});
 		}
 		
 		coc.init();
