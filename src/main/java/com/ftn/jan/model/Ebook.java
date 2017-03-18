@@ -35,6 +35,8 @@ public class Ebook {
 	@ManyToOne(optional=false)
 	private Category category;
 	
+	private String highlight;
+	
 	public Category getCategory() {
 		return category;
 	}
@@ -89,12 +91,20 @@ public class Ebook {
 	public void setMime(String mime) {
 		this.mime = mime;
 	}
+	
+	public String getHighlight() {
+		return highlight;
+	}
+	public void setHighlight(String highlight) {
+		this.highlight = highlight;
+	}
 	@Override
 	public String toString() {
 		return "Ebook [ebookId=" + ebookId + ", title=" + title + ", author=" + author + ", keywords=" + keywords
 				+ ", publicationYear=" + publicationYear + ", filename=" + filename + ", mime=" + mime + ", language="
-				+ language + ", category=" + category + "]";
+				+ language + ", category=" + category + ", highlight=" + highlight + "]";
 	}
+
 
 	
 	

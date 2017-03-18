@@ -27,9 +27,9 @@ public class SearchController {
 		
 		logger.info(searchModel);
 		
-		searchService.search(searchModel);
+		return searchService.search(searchModel);
 		
-		return null;
+		
 	}
 	
 }

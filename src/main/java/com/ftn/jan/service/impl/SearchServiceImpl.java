@@ -1,5 +1,6 @@
 package com.ftn.jan.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.logging.impl.Log4JLogger;
@@ -9,6 +10,7 @@ import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.Query;
 import org.springframework.stereotype.Service;
 
+import com.ftn.jan.ddm.model.RequiredHighlight;
 import com.ftn.jan.ddm.model.SearchType;
 import com.ftn.jan.ddm.query.QueryBuilder;
 import com.ftn.jan.ddm.searcher.InformationRetriever;
@@ -28,16 +30,18 @@ public class SearchServiceImpl implements SearchService {
 	public List<Ebook> search(SearchViewModel searchModel) {
 		
 		BooleanQuery bquery = new BooleanQuery();
+		List<RequiredHighlight> requiredHighlights = new ArrayList<>();
 		
 		searchModel.getFields()
 		.stream()
-		.forEach(f ->  addToQuery(bquery,f));
+		.forEach(f ->  addToQuery(bquery,requiredHighlights,f));
 
-		logger.info(InformationRetriever.getData(bquery));
+		logger.info(InformationRetriever.getData(bquery,requiredHighlights));
 		
-		return null;
+		return InformationRetriever.getData(bquery,requiredHighlights);
 	}
-	
+
+
 	@Override
 	public void addToQuery(BooleanQuery bquery, SearchField f) {
 		
@@ -63,6 +67,24 @@ public class SearchServiceImpl implements SearchService {
 		}else{
 			return Occur.SHOULD;
 		}
+	}
+
+
+	@Override
+	public void addToQuery(BooleanQuery bquery, List<RequiredHighlight> requiredHighlights, SearchField f) {
+		if(!(f.getValue() == null || f.getValue().equals(""))){
+			Query query = null;
+			RequiredHighlight rh = new RequiredHighlight(f.getField(),f.getValue(),null);
+			try {
+				query = QueryBuilder.buildQuery(SearchType.getType(f.getType()), f.getField(), f.getValue());
+			} catch (IllegalArgumentException | ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			bquery.add(query, getOccur(f.getOccur()));
+			requiredHighlights.add(rh);
+		}
+		
 	}
 
 }

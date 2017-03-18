@@ -69,8 +69,25 @@
 
 		sec.submitForm = function(){
 
-			Restangular.all('search').post(sec.searchModel).then(function(){
+			// $http({
+			//     method: 'POST',
+			//     url: 'search',
+			//     data: sec.searchModel,
+			// })
+			// .then(function(response) {
+				
+			// 	Notification.success({message: 'OK', delay: 3000});
+			// 	$uibModalInstance.close(response.data);
+			// },function(response) {
+				
+			// 	Notification.error({message: 'ERROR', delay: 3000});
+			// });	
+
+			Restangular.all('search').post(sec.searchModel).then(function(response){
 				Notification.success({message: 'OK', delay: 3000});
+				console.log(response);
+				$uibModalInstance.close(response);
+
 			},function(){
 				Notification.error({message: 'ERROR', delay: 3000});
 			});
