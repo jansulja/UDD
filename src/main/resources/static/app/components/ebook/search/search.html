@@ -27,20 +27,20 @@ Pretraživanje radova po ključnim rečima.
 Pretraživanje radova po sadržaju.
 Pretraživanje radova po jeziku. -->
 
-<form class="state-form form-horizontal" name="edc.form" ng-submit="edc.submitForm()" novalidate>
+<form class="state-form form-horizontal" name="sec.form" ng-submit="sec.submitForm()" novalidate>
 	<div class="modal-header">
-		<h2 class="text-center"> {{edc.title}} searchModel </h2>
+		<h2 class="text-center"> {{sec.title}} searchModel </h2>
 	</div>
 	<div class="modal-body">
 		<div class="form-group">
 			<div class="col-sm-8 col-sm-offset-2">
 				<label for="title" class="col-sm-2 control-label">Title</label>
 				<div class="col-sm-8">
-					<input class="form-control" ng-model-options="{updateOn: 'default blur', debounce: { 'default': 0, 'blur': 0}}" type="text" ng-model="edc.searchModel.title" id="title" name="title" placeholder="Title"/ required>
+					<input class="form-control" ng-model-options="{updateOn: 'default blur', debounce: { 'default': 0, 'blur': 0}}" type="text" ng-model="sec.searchModel.fields[0].value" id="title" name="title" placeholder="Title"/ required>
 					
-				</div> 
+				</div>
 				<div class="col-sm-2">
-					<select class="form-control" name="operator" ng-options="operator for operator in sec.operators track by operator" ng-model="edc.searchModel.title.operator" required>
+					<select class="form-control" name="operator" ng-options="occurance for occurance in sec.occurances track by occurance" ng-model="sec.searchModel.fields[0].occur" required>
 					</select>	
 				</div>
 			</div>
@@ -48,9 +48,13 @@ Pretraživanje radova po jeziku. -->
 		<div class="form-group">
 			<div class="col-sm-8 col-sm-offset-2">
 				<label for="author" class="col-sm-2 control-label">Author</label>
-				<div class="col-sm-10">
-					<input class="form-control" ng-model-options="{updateOn: 'default blur', debounce: { 'default': 0, 'blur': 0}}" type="text" ng-model="edc.searchModel.author" id="author" name="author" placeholder="Author"/ required>
+				<div class="col-sm-8">
+					<input class="form-control" ng-model-options="{updateOn: 'default blur', debounce: { 'default': 0, 'blur': 0}}" type="text" ng-model="sec.searchModel.fields[1].value" id="author" name="author" placeholder="Author"/ required>
 					
+				</div>
+				<div class="col-sm-2">
+					<select class="form-control" name="operator" ng-options="occurance for occurance in sec.occurances track by occurance" ng-model="sec.searchModel.fields[1].occur" required>
+					</select>	
 				</div> 
 			</div>
 		</div>
@@ -58,9 +62,13 @@ Pretraživanje radova po jeziku. -->
 		<div class="form-group">
 			<div class="col-sm-8 col-sm-offset-2">
 				<label for="keywords" class="col-sm-2 control-label">Keywords</label>
-				<div class="col-sm-10">
-					<input class="form-control" ng-model-options="{updateOn: 'default blur', debounce: { 'default': 0, 'blur': 0}}" type="text" ng-model="edc.searchModel.keywords" id="keywords" name="keywords" placeholder="Keywords"/ required>
+				<div class="col-sm-8">
+					<input class="form-control" ng-model-options="{updateOn: 'default blur', debounce: { 'default': 0, 'blur': 0}}" type="text" ng-model="sec.searchModel.fields[2].value" id="keywords" name="keywords" placeholder="Keywords"/ required>
 					
+				</div>
+				<div class="col-sm-2">
+					<select class="form-control" name="operator" ng-options="occurance for occurance in sec.occurances track by occurance" ng-model="sec.searchModel.fields[2].occur" required>
+					</select>	
 				</div> 
 			</div>
 		</div>
@@ -68,10 +76,13 @@ Pretraživanje radova po jeziku. -->
 		<div class="form-group">
 			<div class="col-sm-8 col-sm-offset-2">
 				<label for="language" class="col-sm-2 control-label">Language</label>
-				<div class="col-sm-10">
-					<select class="form-control" name="language" ng-options="language.name for language in edc.languages track by language.name" ng-model="edc.searchModel.language" required>
-					</select>	
+				<div class="col-sm-8">
+					<input class="form-control" ng-model-options="{updateOn: 'default blur', debounce: { 'default': 0, 'blur': 0}}" type="text" ng-model="sec.searchModel.fields[3].value" id="language" name="language" placeholder="Language"/ required>
 					
+				</div>
+				<div class="col-sm-2">
+					<select class="form-control" name="operator" ng-options="occurance for occurance in sec.occurances track by occurance" ng-model="sec.searchModel.fields[3].occur" required>
+					</select>	
 				</div> 
 			</div>
 		</div>
@@ -79,9 +90,13 @@ Pretraživanje radova po jeziku. -->
 		<div class="form-group">
 			<div class="col-sm-8 col-sm-offset-2">
 				<label for="text" class="col-sm-2 control-label">Text</label>
-				<div class="col-sm-10">
-					<input class="form-control" ng-model-options="{updateOn: 'default blur', debounce: { 'default': 0, 'blur': 0}}" type="text" ng-model="edc.searchModel.text" id="text" name="text" placeholder="Text"/ required>
+				<div class="col-sm-8">
+					<input class="form-control" ng-model-options="{updateOn: 'default blur', debounce: { 'default': 0, 'blur': 0}}" type="text" ng-model="sec.searchModel.fields[4].value" id="text" name="text" placeholder="Text"/ required>
 					
+				</div>
+				<div class="col-sm-2">
+					<select class="form-control" name="operator" ng-options="occurance for occurance in sec.occurances track by occurance" ng-model="sec.searchModel.fields[4].occur" required>
+					</select>	
 				</div> 
 			</div>
 		</div>
@@ -92,8 +107,8 @@ Pretraživanje radova po jeziku. -->
 </div>
 <div class="modal-footer">
 	<div class="text-center">
-		<button class="btn btn-success" type="submit" ng-disabled="edc.form.$invalid">Save</button>
-		<button class="btn btn-warning" type="button" id="cancelButton" ng-click="edc.cancel()">Cancel</button>
+		<button class="btn btn-success" type="submit" >Save</button>
+		<button class="btn btn-warning" type="button" id="cancelButton" ng-click="sec.cancel()">Cancel</button>
 	</div>
 </div>
 </form>

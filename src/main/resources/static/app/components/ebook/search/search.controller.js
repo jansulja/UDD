@@ -13,7 +13,50 @@
 
 		sec.init = function(){
 
+			sec.occurances = ['MUST','MUST NOT','SHOULD'];
 
+			sec.searchModel = {
+
+				fields : [
+
+					{
+						field:"title",
+						value:"",
+						occur:"MUST",
+						type:"Regular"
+					},
+					{
+						field:"author",
+						value:"",
+						occur:"MUST",
+						type:"Regular"
+					},
+					{
+						field:"keyword",
+						value:"",
+						occur:"MUST",
+						type:"Regular"
+					},
+					{
+						field:"language",
+						value:"",
+						occur:"MUST",
+						type:"Regular"
+					},
+					{
+						field:"text",
+						value:"",
+						occur:"MUST",
+						type:"Regular"
+					},
+
+
+				]
+
+				
+
+			}
+			
 
 		}
 
@@ -25,6 +68,12 @@
 
 
 		sec.submitForm = function(){
+
+			Restangular.all('search').post(sec.searchModel).then(function(){
+				Notification.success({message: 'OK', delay: 3000});
+			},function(){
+				Notification.error({message: 'ERROR', delay: 3000});
+			});
 
 		}
 
