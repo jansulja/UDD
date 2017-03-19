@@ -1,21 +1,22 @@
+
 <div class="row">
+	<hr />
 	<div class="col-lg-8 col-lg-offset-2">
 		
-		<h3>{{result.author}}</h3>
+		<a ng-href="ebook/download/{{result.filename}}"><h4 style="color: #08088A">{{result.title}}</h3></a>
 		
-		<ul class="list-unstyled list-inline">
+		<ul style="color: green;" class="list-unstyled list-inline">
 				<li>Author : {{result.author}}</li>
-				<li>Title : {{result.title}}</li>
 				<li>Keywords : {{result.keywords}}</li>
 				<li>Publication Year : {{result.publicationYear}}</li>
-				<li>Language : {{result.language}}</li>
-				<li>Category : {{result.category}}</li>
+				<li>Language : {{result.language.name}}</li>
+				<li>Category : {{result.category.name}}</li>
 			</ul>
-			<p class="text-left">
-				{{result.highlight}}
+			<p class="text-left" style="font-style: italic;">
+				<div style="font-style: italic;" ng-bind-html="result.highlight"></div>
 			</p>
-			<p class="text-left lead">
-				<a href="" ng-click="rec.download()">Download</a>
+			<p class="text-right">
+				<a ng-href="ebook/download/{{result.filename}}">Download</a>
 			</p>
 
 	</div>

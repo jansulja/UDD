@@ -1,10 +1,13 @@
 package com.ftn.jan.service.impl;
 
+import java.io.File;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.ResourceBundle;
 
+import org.apache.commons.logging.impl.Log4JLogger;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field.Store;
 import org.apache.lucene.document.TextField;
@@ -14,8 +17,10 @@ import org.apache.lucene.search.MatchAllDocsQuery;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.TermQuery;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Service;
 
+import com.ftn.jan.controller.EbookController;
 import com.ftn.jan.ddm.indexer.IndexManager;
 import com.ftn.jan.ddm.searcher.InformationRetriever;
 import com.ftn.jan.ddm.searcher.ResultRetriever;
@@ -32,6 +37,8 @@ public class EbookServiceImpl implements EbookService {
 
 	@Autowired
 	private EbookRepository ebookRepository;
+	
+	private static Log4JLogger logger = new Log4JLogger(EbookServiceImpl.class.getName());
 	
 	@Override
 	public List<Ebook> findAll() {
@@ -168,6 +175,21 @@ public class EbookServiceImpl implements EbookService {
 			throw new NotFoundException("Ebook requested for deletion not found.");
 		}
 		
+	}
+
+	@Override
+	public FileSystemResource download(String filename) {
+		File file = new File(ResourceBundle.getBundle("index").getString("docs") + File.separator + filename + ".pdf");
+		
+		logger.info(ResourceBundle.getBundle("index").getString("docs"));
+		
+		return new FileSystemResource(file); 
+	}
+
+	@Override
+	public File downloadFile(String filename) {
+		File file = new File(ResourceBundle.getBundle("index").getString("docs") + File.separator + filename + ".pdf");
+		return file;
 	}
 	
 	

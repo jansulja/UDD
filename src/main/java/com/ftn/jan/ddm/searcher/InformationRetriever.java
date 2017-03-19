@@ -138,6 +138,7 @@ public class InformationRetriever {
 							File docFile = new File(doc.get("location"));
 							String value = UDDIndexer.getHandler(docFile).getDocument(docFile).get(rh.getFieldName());
 							String tempHL = hl.getBestFragment(analyzer, rh.getFieldName(), value);
+							//tempHL = tempHL.replace("B>", "b>");
 							if (tempHL != null) {
 								temp += rh.getFieldName() + ": " + tempHL.trim() + " ... ";
 							}
