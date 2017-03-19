@@ -7,13 +7,13 @@
 
 	angular.module('udd.ebook.results').controller('ResultsController',ResultsController); 
 
-	ResultsController.$inject = ['Restangular','ResultsService','Ebook','Notification','$http'];
+	ResultsController.$inject = ['Restangular','ResultsService','Ebook','Notification','$http','LoginService'];
 
- 	function ResultsController(Restangular,ResultsService,Ebook,Notification,$http) {
+ 	function ResultsController(Restangular,ResultsService,Ebook,Notification,$http,LoginService) {
 		var rec = this;
 
 		rec.results = ResultsService.getResults();
-
+		rec.currentUser = LoginService.getCurrentUser();
 		console.log(results);
 
 		rec.download = function(result){

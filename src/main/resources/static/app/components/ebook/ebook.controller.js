@@ -3,9 +3,9 @@
 	angular.module('udd.ebook')
 	.controller('EbookController',EbookController);
 	
-	EbookController.$inject = ['Restangular','editModal','Notification','$http'];
+	EbookController.$inject = ['Restangular','editModal','Notification','$http','LoginService'];
 	
-	function EbookController(Restangular,editModal,Notification,$http){
+	function EbookController(Restangular,editModal,Notification,$http,LoginService){
 		
 		var ebc = this;
 		
@@ -17,6 +17,8 @@
 		  if(ebooks.length==0){
 		  	Notification('Ebook repository is empty.');
 		  }
+
+		  ebc.currentUser = LoginService.getCurrentUser();
 		  
 		})
 		}

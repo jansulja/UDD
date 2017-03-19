@@ -22,3 +22,9 @@
 .app-modal-window .modal-dialog {
   width: 90%;
 }
+
+li > a{
+
+	color: #615321 !important;
+
+}

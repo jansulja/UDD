@@ -5,7 +5,7 @@
 				Ebook repository
 			</h3><br/>
 
-			<button ng-click="ebc.new()" type="button" class="btn btn-success">Add ebook</button>
+			<button ng-show="ebc.currentUser.firstname" ng-click="ebc.new()" type="button" class="btn btn-success">Add ebook</button>
 
 				<table class="table table-bordered table-hover table-condensed">
 				<thead>
@@ -23,18 +23,12 @@
 							Publication year
 						</th>
 						<th>
-							Filename
-						</th>
-						<th>
-							MIME
-						</th>
-						<th>
 							Category
 						</th>
 						<th>
 							Language
 						</th>
-						<th>
+						<th ng-show="ebc.currentUser.firstname">
 							Options
 						</th>
 					</tr>
@@ -47,12 +41,10 @@
 						<td>{{ebook.author}}</td>
 						<td>{{ebook.keywords}}</td>
 						<td>{{ebook.publicationYear}}</td>
-						<td>{{ebook.filename}}</td>
-						<td>{{ebook.mime}}</td>
 						<td>{{ebook.category.name}}</td>
 						<td>{{ebook.language.name}}</td>
 			
-						<td>
+						<td ng-show="ebc.currentUser.firstname">
 						<button ng-click="ebc.delete(ebook.ebookId)" type="button" class="btn btn-default btn-sm">
   <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 </button>

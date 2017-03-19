@@ -3,7 +3,8 @@
 	<hr />
 	<div class="col-lg-8 col-lg-offset-2">
 		
-		<a ng-href="ebook/download/{{result.filename}}"><h4 style="color: #08088A">{{result.title}}</h3></a>
+		<a ng-show="rec.currentUser.firstname" ng-href="ebook/download/{{result.filename}}"><h4 style="color: #08088A">{{result.title}}</h3></a>
+		<h4 ng-hide="rec.currentUser.firstname" style="color: #08088A">{{result.title}}</h3>
 		
 		<ul style="color: green;" class="list-unstyled list-inline">
 				<li>Author : {{result.author}}</li>
@@ -16,7 +17,8 @@
 				<div style="font-style: italic;" ng-bind-html="result.highlight"></div>
 			</p>
 			<p class="text-right">
-				<a ng-href="ebook/download/{{result.filename}}">Download</a>
+				<a ng-show="rec.currentUser.firstname" ng-href="ebook/download/{{result.filename}}">Download</a>
+				<a ng-hide="rec.currentUser.firstname" href="" ng-click="rec.showAdv()">Download</a>
 			</p>
 
 	</div>
