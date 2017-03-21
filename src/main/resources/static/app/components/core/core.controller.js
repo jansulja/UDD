@@ -13,9 +13,10 @@
 		coc.init = function(){
 			LoginService.updateCurrentUser(
 					
-				function(firstname,lastname){
+				function(firstname,lastname,type){
 					coc.currentUser.firstname = firstname;
 					coc.currentUser.lastname = lastname;
+					coc.currentUser.type = type;
 				}
 			
 			);

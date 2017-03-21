@@ -1,63 +1,112 @@
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-md-12">
-			<h3 class="text-center">
-				Ebook repository
-			</h3><br/>
+<div id="wrapper" class="toggled">
 
-			<button ng-show="ebc.currentUser.firstname" ng-click="ebc.new()" type="button" class="btn btn-success">Add ebook</button>
+	<!-- Sidebar -->
+	<div id="sidebar-wrapper">
+		<ul class="sidebar-nav">
+			<li class="sidebar-brand">
+				<a href="#">
+					Categories
+				</a>
+			</li>
 
-				<table class="table table-bordered table-hover table-condensed">
-				<thead>
-					<tr>
-						<th>
-							Title
-						</th>
-						<th>
-							Author
-						</th>
-						<th>
-							Keywords
-						</th>
-						<th>
-							Publication year
-						</th>
-						<th>
-							Category
-						</th>
-						<th>
-							Language
-						</th>
-						<th ng-show="ebc.currentUser.firstname">
-							Options
-						</th>
-					</tr>
-				</thead>
-				<tbody>
-				
-					<tr ng-repeat="ebook in ebc.ebooks">
-						
-						<td>{{ebook.title}}</td>
-						<td>{{ebook.author}}</td>
-						<td>{{ebook.keywords}}</td>
-						<td>{{ebook.publicationYear}}</td>
-						<td>{{ebook.category.name}}</td>
-						<td>{{ebook.language.name}}</td>
-			
-						<td ng-show="ebc.currentUser.firstname">
-						<button ng-click="ebc.delete(ebook.ebookId)" type="button" class="btn btn-default btn-sm">
-  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-</button>
-<button ng-click="ebc.edit(ebook)" type="button" class="btn btn-default btn-sm">
-  <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-</button>
-						</td>
+			<li ng-repeat="category in ebc.categories">
+				<a href="" ng-click="ebc.getEbooksForCategory(category.name)">{{category.name}}</a>
+			</li>
+
+
+		</ul>
+	</div>
+	<!-- /#sidebar-wrapper -->
+
+	<!-- Page Content -->
+	<div id="page-content-wrapper">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12">
+					<h3 class="text-center">
+						Ebook repository 
+					</h3><br />
 					
-					</tr>
-				
-				
-				</tbody>
-			</table>
+
+					<p ng-hide="ebc.showTable" class="text-center" style="margin-top: 100px;">
+					 <span us-spinner="{radius:30, width:8, length: 16}" spinner-key="spinner-1" style="position: relative;"></span>
+</p>
+					<button ng-show="ebc.currentUser.type==='administrator'" ng-click="ebc.new()" type="button" class="btn btn-success">Add ebook</button>
+
+
+					<table ng-show="ebc.showTable" class="table table-bordered table-hover table-condensed">
+						<thead>
+							<tr>
+								<th>
+									Title
+								</th>
+								<th>
+									Author
+								</th>
+								<th>
+									Keywords
+								</th>
+								<th>
+									Publication year
+								</th>
+								<th>
+									Category
+								</th>
+								<th>
+									Language
+								</th>
+								<th ng-hide="ebc.currentUser.category.name!==ebook.category.name || !ebc.currentUser.firstname">
+									Options
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+
+							<tr ng-repeat="ebook in ebc.ebooks">
+
+								<td>{{ebook.title}}</td>
+								<td>{{ebook.author}}</td>
+								<td>{{ebook.keywords}}</td>
+								<td>{{ebook.publicationYear}}</td>
+								<td>{{ebook.category.name}}</td>
+								<td>{{ebook.language.name}}</td>
+
+								<td ng-show="ebc.currentUser.type==='administrator'">
+									<button ng-click="ebc.delete(ebook.ebookId)" type="button" class="btn btn-default btn-sm">
+										<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+									</button>
+									<button ng-click="ebc.edit(ebook)" type="button" class="btn btn-default btn-sm">
+										<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+									</button>
+									<button ng-click="ebc.download(ebook.ebookId)" type="button" class="btn btn-default btn-sm">
+										<span class="glyphicon glyphicon-download" aria-hidden="true"></span>
+									</button>
+								</td>
+
+								<td ng-show="ebc.currentUser.type==='pretplatnik' && !ebc.currentUser.category">
+									<button ng-click="ebc.download(ebook.ebookId)" type="button" class="btn btn-default btn-sm">
+										<span class="glyphicon glyphicon-download" aria-hidden="true"></span>
+									</button>
+								</td>
+
+								<td ng-show="ebc.currentUser.type==='pretplatnik' && ebc.currentUser.category.name===ebook.category.name">
+									<button ng-click="ebc.download(ebook.ebookId)" type="button" class="btn btn-default btn-sm">
+										<span class="glyphicon glyphicon-download" aria-hidden="true"></span>
+									</button>
+								</td>
+
+							</tr>
+
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+			
 		</div>
 	</div>
+	<!-- /#page-content-wrapper -->
+
 </div>
+
+

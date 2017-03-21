@@ -17,10 +17,10 @@
 						<li>
 							<a ui-sref="ebook">Ebooks</a>
 						</li>
-						<li ng-show="coc.currentUser.firstname">
+						<li ng-show="coc.currentUser.type==='administrator'">
 							<a ui-sref="category">Categories</a>
 						</li>
-						<li ng-show="coc.currentUser.firstname">
+						<li ng-show="coc.currentUser.type==='administrator'">
 							<a ui-sref="user">Users</a>
 						</li>
 						<li>

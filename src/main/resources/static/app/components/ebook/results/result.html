@@ -17,7 +17,7 @@
 				<div style="font-style: italic;" ng-bind-html="result.highlight"></div>
 			</p>
 			<p class="text-right">
-				<a ng-show="rec.currentUser.firstname" ng-href="ebook/download/{{result.filename}}">Download</a>
+				<a ng-show="rec.currentUser.type==='administrator' || (rec.currentUser.type==='pretplatnik' && !rec.currentUser.category) || (rec.currentUser.type==='pretplatnik' && rec.currentUser.category.name ===result.category.name)" ng-href="ebook/download/{{result.filename}}">Download</a>
 				<a ng-hide="rec.currentUser.firstname" href="" ng-click="rec.showAdv()">Download</a>
 			</p>
 

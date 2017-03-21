@@ -6,7 +6,7 @@
 	LoginService.$inject = ['Restangular','$http'];
 	function LoginService(Restangular,$http){
 		
-		this.currentUser ={firstname:undefined,lastname:undefined,type:undefined};
+		this.currentUser ={firstname:undefined,lastname:undefined,type:undefined,category:undefined};
 		
 		this.updateCurrentUser = function(callback){
 			var that = this.currentUser;
@@ -16,7 +16,8 @@
 				  that.firstname = user.firstname;
 				  that.lastname = user.lastname;
 				  that.type = user.type;
-				  callback(user.firstname,user.lastname);
+				  that.category = user.category;
+				  callback(user.firstname,user.lastname,user.type);
 				 }
 			});
 						
@@ -58,6 +59,7 @@
 				that.firstname = response.data.firstname;
 				that.lastname = response.data.lastname;
 				that.type = response.data.type;
+				 that.category =  response.data.category;
 				success();
 			},function(response) {
 				

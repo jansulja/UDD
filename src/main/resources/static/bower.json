@@ -23,6 +23,7 @@
     "angular-fancy-modal": "^0.1.4",
     "angular-local-storage": "^0.5.2",
     "angular-sanitize": "^1.6.3",
-    "angular-ui-notification": "^0.3.6"
+    "angular-ui-notification": "^0.3.6",
+    "angular-spinner": "^1.0.1"
   }
 }

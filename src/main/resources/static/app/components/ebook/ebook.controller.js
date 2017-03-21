@@ -3,24 +3,27 @@
 	angular.module('udd.ebook')
 	.controller('EbookController',EbookController);
 	
-	EbookController.$inject = ['Restangular','editModal','Notification','$http','LoginService'];
+	EbookController.$inject = ['Restangular','editModal','Notification','$http','LoginService','Category','usSpinnerService','$q'];
 	
-	function EbookController(Restangular,editModal,Notification,$http,LoginService){
+	function EbookController(Restangular,editModal,Notification,$http,LoginService,Category,usSpinnerService,$q){
 		
 		var ebc = this;
 		
 		ebc.init = function(){
-			Restangular.all('ebook/list').getList()
-			.then(function(ebooks) {
-		  
-		  ebc.ebooks = ebooks; 
-		  if(ebooks.length==0){
-		  	Notification('Ebook repository is empty.');
-		  }
 
-		  ebc.currentUser = LoginService.getCurrentUser();
-		  
-		})
+			ebc.showTable = true;
+			ebc.abort = $q.defer();
+
+
+			Category.getList()  
+			.then(function(categories) {
+				ebc.categories = categories; 
+			});
+
+
+			ebc.currentUser = LoginService.getCurrentUser();
+
+			
 		}
 
 		
@@ -58,6 +61,31 @@
 			
 
 		}
+
+
+
+		ebc.getEbooksForCategory = function(name){
+			usSpinnerService.spin('spinner-1');
+			ebc.showTable=false;
+
+			ebc.abort.resolve();
+			ebc.abort = $q.defer();
+
+			Restangular.all('ebook/list/'+name).withHttpConfig({timeout: ebc.abort.promise}).getList()
+			.then(function(ebooks) {
+
+				ebc.ebooks = ebooks; 
+				usSpinnerService.stop('spinner-1');
+				ebc.showTable=true;
+				if(ebooks.length==0){
+					Notification('Ebook repository is empty.');
+				}
+
+			});
+
+
+		}
+
 
 		ebc.init();
 		

@@ -1,11 +1,10 @@
 package com.ftn.jan.controller;
 
-import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -14,26 +13,31 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.impl.Log4JLogger;
+import org.apache.lucene.search.BooleanClause.Occur;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.ftn.jan.ddm.searcher.SearchField;
 import com.ftn.jan.model.Ebook;
 import com.ftn.jan.service.EbookService;
+import com.ftn.jan.service.SearchService;
 import com.ftn.jan.util.EbookPDFHandler;
 import com.ftn.jan.util.FileSystemStorageService;
 import com.ftn.jan.util.StorageService;
 import com.ftn.jan.viewmodel.EbookViewModel;
+import com.ftn.jan.viewmodel.SearchViewModel;
 
 import javassist.NotFoundException;
+
 
 @RestController
 @RequestMapping("ebook")
@@ -44,6 +48,9 @@ public class EbookController {
 
 	@Autowired
 	private EbookService ebookService;
+	
+	@Autowired
+	private SearchService searchService;
 
 	private static Log4JLogger logger = new Log4JLogger(EbookController.class.getName());
 	private static final int BUFFER_SIZE = 4096;
@@ -171,6 +178,23 @@ public class EbookController {
 		 return ebookService.findAll();
 		
 	}
+	
+	@RequestMapping(path = "/list/{category}", method = RequestMethod.GET)
+	public List<Ebook> listByCategory(@PathVariable("category") String category) {
+		
+
+		return searchService.search(new SearchViewModel(){{ setFields(Arrays.asList(new SearchField(){{ 
+			setField("category");
+			setOccur("MUST");
+			setType("Regular");
+			setValue(category);
+
+		}})); }});
+	
+		
+	}
+	
+	
 
 	
 
