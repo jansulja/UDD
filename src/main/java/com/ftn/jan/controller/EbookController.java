@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.impl.Log4JLogger;
 import org.apache.lucene.search.BooleanClause.Occur;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -57,6 +58,7 @@ public class EbookController {
 	
 	
 	@RequestMapping(path = "/insert", method = RequestMethod.POST,consumes = {"multipart/form-data"})
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public void insert(@RequestPart("ebook") EbookViewModel ebook,@RequestPart("file") MultipartFile file) {
 		
 		ebook.setEbookId(System.currentTimeMillis());
@@ -66,6 +68,7 @@ public class EbookController {
 	}
 	
 	@RequestMapping(path = "/edit", method = RequestMethod.POST,consumes = {"multipart/form-data"})
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public void edit(@RequestPart("ebook") EbookViewModel ebook,@RequestPart(name="file",required=false) MultipartFile file) throws NotFoundException {
 
 		if(file==null){
@@ -79,6 +82,7 @@ public class EbookController {
 	
 	
 	@RequestMapping(path = "/upload", method = RequestMethod.POST)
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public Ebook upload(@RequestPart(name="ebookId",required=false) Long ebookId, @RequestPart("file") MultipartFile file,
 			RedirectAttributes redirectAttributes) {
 		logger.info(ebookId);
@@ -88,29 +92,10 @@ public class EbookController {
 
 	}
 	
-//	@GetMapping(value = "/download/{filename}")
-//	public void download(HttpServletResponse response, @PathVariable("filename") String filename){
-//		
-//		File file = ebookService.downloadFile(filename);
-//		logger.info(filename);
-//		
-//		response.setContentType("application/pdf");
-//		//response.setHeader("Content-Disposition", String.format("inline; filename=\"" + file.getName() +"\""));
-//		response.setHeader("Content-Disposition", String.format("attachment; filename=\"%s\"", file.getName()));
-//	        
-//		
-//		try {
-//			InputStream inputStream = new BufferedInputStream(new FileInputStream(file));
-//			FileCopyUtils.copy(inputStream, response.getOutputStream());
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-//		
-//	} 
+
 	
 	@GetMapping(value = "/download/{filename}")
+	@PreAuthorize("hasAnyRole('ROLE_SUBSCRIBER','ROLE_ADMIN')")
     public void doDownload(HttpServletRequest request,
             HttpServletResponse response,@PathVariable("filename") String filename) throws IOException {
  
@@ -165,6 +150,7 @@ public class EbookController {
 	
 	
 	@DeleteMapping(value="delete/{ebookId}")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public void delete(@PathVariable("ebookId") Long ebookId) throws NotFoundException{
 		ebookService.delete(ebookId);
 	};
@@ -172,7 +158,6 @@ public class EbookController {
 	
 	
 	@RequestMapping(path = "/list", method = RequestMethod.GET)
-	//@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public List<Ebook> list() {
 
 		 return ebookService.findAll();

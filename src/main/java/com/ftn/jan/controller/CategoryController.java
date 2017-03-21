@@ -3,6 +3,7 @@ package com.ftn.jan.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,6 +32,7 @@ public class CategoryController {
 	}
 	
 	@PostMapping
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public void insert(@RequestBody Category category){
 		
 		categoryService.save(category);
@@ -38,11 +40,13 @@ public class CategoryController {
 	}
 	
 	@PutMapping
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public void update(@RequestBody Category category){
 		categoryService.update(category);
 	}
 	
 	@DeleteMapping("/{categoryId}")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public void delete(@PathVariable(value="categoryId") Integer categoryId) {
 		categoryService.remove(categoryId);
 	};

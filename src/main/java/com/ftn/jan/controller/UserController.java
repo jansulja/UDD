@@ -31,6 +31,7 @@ public class UserController {
 	
 	
 	@GetMapping
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public List<User> list(){
 		
 		return userService.findAll();
@@ -38,6 +39,7 @@ public class UserController {
 	}
 	
 	@GetMapping("list")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public List<User> findAll(){
 		
 		return userService.findAll();
@@ -45,6 +47,7 @@ public class UserController {
 	}
 	
 	@PostMapping
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public void insert(@RequestBody User user){
 		
 		userService.save(user);
@@ -57,11 +60,13 @@ public class UserController {
 	};
 	
 	@PutMapping
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public void update(@RequestBody User user){
 		userService.update(user);
 	}
 	
 	@DeleteMapping("/{userId}")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public void delete(@PathVariable(value="userId") Integer userId) {
 		userService.remove(userId);
 	};
@@ -102,36 +107,6 @@ public class UserController {
 		
 	}
 	
-//	@RequestMapping(method = RequestMethod.GET)
-//	//@ResponseBody
-//	@PreAuthorize("hasRole('USER')")
-//	public String changePassword(){
-//		userService.changePassword("jkdjlsd");
-//		return "dasdkasd";
-//	}
-	
-	//Testing roles
-	@GetMapping(value="/admin")
-	@PreAuthorize("hasRole('ADMIN')")
-	public String adminTest(){
-		return "Only admin can see this!";
-	}
-	
-	@GetMapping(value="/sub")
-	@PreAuthorize("hasRole('SUBSCRIBER')")
-	public String subTest(){
-		return "Only subscriber can see this!";
-	}
-	
-	@GetMapping(value="/auth")
-	@PreAuthorize("hasAnyRole('SUBSCRIBER','ADMIN')")
-	public String authTest(){
-		return "Only authenticated user can see this!";
-	}
-	
-	@GetMapping(value="/open")
-	public String openTest(){
-		return "Anybody can see this!";
-	}
+
 	
 }
