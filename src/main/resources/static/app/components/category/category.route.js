@@ -25,11 +25,6 @@
 					controller : 'CategoryController',
 					controllerAs : 'cac'
 
-				},
-				footer: {
-
-					templateUrl: "app/components/core/footer.html"
-
 				}
 
 			}

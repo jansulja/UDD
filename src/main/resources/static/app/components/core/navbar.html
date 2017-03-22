@@ -86,8 +86,9 @@
 	</div>
 </div> -->
 
-        <div ng-class="{cover: coc.getCurrentState()==='home'}">
-            <div class="navbar">
+        <!-- <div ng-class="{cover: coc.getCurrentState()==='home'}"> -->
+        <div class="cover" style="max-height: 55px; min-height: 55px;">
+            <div class="navbar navbar-default">
                 <div class="container">
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse">
@@ -132,8 +133,8 @@
                     </div>
                 </div>
             </div>
-            <div ng-show="coc.getCurrentState()==='home' || coc.getCurrentState()==='login'" class="cover-image" style="background-image : url('assets/img/background.jpg')"></div>
-            <div ng-show="coc.getCurrentState()==='home'" class="container">
+            <div class="cover-image" style="height: 55px; background-image : url('assets/img/navbar.png')"></div>
+            <!-- <div ng-show="coc.getCurrentState()==='home' " class="container">
                 <div class="row">
                     <div class="col-md-8 text-center">
                         <h1 class="text-muted">Welcome&nbsp;to&nbsp;<br><br>Ebook Repository</h1>
@@ -143,5 +144,5 @@
                         <a class="btn btn-lg btn-link">Read more<br></a>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>

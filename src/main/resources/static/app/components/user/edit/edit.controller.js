@@ -8,7 +8,7 @@
 	function EditUserController(Restangular,$uibModalInstance,User,items,$http,Notification,Category){
 		
 		var euc = this;
-		euc.title = "";
+		
 		
 
 		euc.init = function(){
@@ -22,15 +22,16 @@
 			})
 
 			if(items.status === 'edit'){
-
+				euc.title = "Edit";
 				euc.user = items.user;
 				euc.status = 'edit';
 
 			}else if(items.status === 'editProfile'){
+				euc.title = "Edit";
 				euc.user = items.user;
 				euc.status = 'editProfile';
 			}else{
-
+				euc.title = "New";
 				euc.user = {};
 				euc.status = 'new';
 			}

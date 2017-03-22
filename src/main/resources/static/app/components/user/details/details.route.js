@@ -25,11 +25,6 @@
 					controller : 'UserDetailsController',
 					controllerAs : 'udc'
 
-				},
-				footer: {
-
-					templateUrl: "app/components/core/footer.html"
-
 				}
 
 			}

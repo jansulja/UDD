@@ -25,11 +25,6 @@
 					controller : 'EbookController',
 					controllerAs : 'ebc'
 
-				},
-				footer: {
-
-					templateUrl: "app/components/core/footer.html"
-
 				}
 
 			}

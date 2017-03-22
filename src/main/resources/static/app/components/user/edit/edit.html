@@ -1,6 +1,6 @@
 <form class="state-form form-horizontal" name="euc.form" ng-submit="euc.submitForm()" novalidate>
 	<div class="modal-header">
-	    <h2 class="text-center"> {{euc.title}} user </h2>
+	    <h2 class="text-center"> {{euc.title}} User </h2>
 	</div>
 	<div class="modal-body">
 	    <div class="form-group">
@@ -58,9 +58,9 @@
 	    	<div class="col-sm-8 col-sm-offset-2">
 	    		<label for="category" class="col-sm-2 control-label">Category</label>
 	    		<div class="col-sm-10">
-	    			<select class="form-control" name="category"  ng-options="category.name for category in euc.categories track by category.name" ng-model="euc.user.category" required>
+	    			<select class="form-control" name="category"  ng-options="category.name for category in euc.categories track by category.name" ng-model="euc.user.category">
 	    			</select>	
-	    			<p class="text-center" ng-show="euc.form.category.$touched && euc.form.category.$error.required" style="color: red;" >Error Category</p>
+	    			
 	    		</div> 
 	    	</div>
 	    </div>

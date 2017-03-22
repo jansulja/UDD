@@ -8,7 +8,7 @@
 	function EditCategoryController(Restangular,$uibModalInstance,Category,items,$http,Notification){
 		
 		var ecc = this;
-		ecc.title = "";
+		
 		
 
 		ecc.init = function(){
@@ -16,9 +16,9 @@
 			if(items.status === 'edit'){
 
 				ecc.category = items.category;
-
+				ecc.title = "Edit";
 			}else{
-
+				ecc.title = "New";
 				ecc.category = { name: 'asd'};
 				
 			}

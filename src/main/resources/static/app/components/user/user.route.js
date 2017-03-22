@@ -25,11 +25,6 @@
 					controller : 'UserController',
 					controllerAs : 'usc'
 
-				},
-				footer: {
-
-					templateUrl: "app/components/core/footer.html"
-
 				}
 
 			}

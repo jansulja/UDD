@@ -84,7 +84,7 @@
 			// });	
 
 			Restangular.all('search').post(sec.searchModel).then(function(response){
-				Notification.success({message: 'OK', delay: 3000});
+				Notification.success({message: 'Finished', delay: 3000});
 				console.log(response);
 				$uibModalInstance.close(response);
 
