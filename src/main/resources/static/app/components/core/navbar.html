@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<!-- <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
 			<nav class="navbar" role="navigation" style="color: red; background-color: #C4B992; outline-color: white; font">
@@ -6,7 +6,7 @@
 					 
 					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 						 <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-				<!-- 	</button> <a class="navbar-brand" href="#"><img src="../../../assets/img/logo2.png" width="32px" height="32px"></a> -->
+				
 				</div>
 				
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -46,4 +46,102 @@
 			</nav>
 		</div>
 	</div>
-</div>
+</div> -->
+
+<!-- <div class="cover">
+	<div class="navbar">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#"><span>Brand</span></a>
+			</div>
+			<div class="collapse navbar-collapse" id="navbar-ex-collapse">
+				<ul class="nav navbar-nav navbar-right">
+					<li class="active">
+						<a href="#">Home</a>
+					</li>
+					<li>
+						<a href="#">Contacts</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="cover-image" style="background-image : url('http://hd-wall-papers.com/images/wallpapers/background-images-books/background-images-books-4.jpg')"></div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8 text-center">
+				<h1 class="text-muted">Welcome&nbsp;to&nbsp;<br><br>Ebook Repository</h1>
+				<p class="text-muted">Search, read, download ebook-s and more...</p>
+				<br>
+				<br>
+				<a class="btn btn-lg btn-link">Read more<br></a>
+			</div>
+		</div>
+	</div>
+</div> -->
+
+        <div ng-class="{cover: coc.getCurrentState()==='home'}">
+            <div class="navbar">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#"><span><img width="32px" height="32px" src="http://library.si.edu/sites/all/modules/sil_books/icons/book.png"/></span></a>
+                    </div>
+                    <div class="collapse navbar-collapse" id="navbar-ex-collapse">
+                        
+                    	<ul class="nav navbar-nav">
+						<li>
+							<a ui-sref="home">Home</a>
+						</li>
+						<li>
+							<a ui-sref="ebook">Ebooks</a>
+						</li>
+						<li ng-show="coc.currentUser.type==='administrator'">
+							<a ui-sref="category">Categories</a>
+						</li>
+						<li ng-show="coc.currentUser.type==='administrator'">
+							<a ui-sref="user">Users</a>
+						</li>
+						<li>
+							<a href="" ng-click="coc.search()">Search</a>
+						</li>
+						
+					</ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li ng-show="coc.currentUser.firstname">
+							<a style="color: green;" ui-sref="details"><i> {{coc.currentUser.firstname + " " + coc.currentUser.lastname}}</i></a>
+						</li>
+						<li ng-show="coc.currentUser.firstname">
+							<a href="#" ng-click="coc.logout()"><b>Logout</b></a>
+						</li>
+						<li ng-show="!coc.currentUser.firstname">
+							<a ui-sref="login"><b>Login</b></a>
+						</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div ng-show="coc.getCurrentState()==='home' || coc.getCurrentState()==='login'" class="cover-image" style="background-image : url('assets/img/background.jpg')"></div>
+            <div ng-show="coc.getCurrentState()==='home'" class="container">
+                <div class="row">
+                    <div class="col-md-8 text-center">
+                        <h1 class="text-muted">Welcome&nbsp;to&nbsp;<br><br>Ebook Repository</h1>
+                        <p class="text-muted">Search, read, download ebook-s and more...</p>
+                        <br>
+                        <br>
+                        <a class="btn btn-lg btn-link">Read more<br></a>
+                    </div>
+                </div>
+            </div>
+        </div>

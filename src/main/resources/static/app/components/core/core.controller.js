@@ -48,6 +48,10 @@
 				
 			});
 		}
+
+		coc.getCurrentState = function(){
+			return $state.current.name;
+		}
 		
 		coc.init();
 		
