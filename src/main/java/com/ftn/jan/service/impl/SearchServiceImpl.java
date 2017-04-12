@@ -36,9 +36,11 @@ public class SearchServiceImpl implements SearchService {
 		.stream()
 		.forEach(f ->  addToQuery(bquery,requiredHighlights,f));
 
-		logger.info(InformationRetriever.getData(bquery,requiredHighlights));
+		List<Ebook> results = InformationRetriever.getData(bquery,requiredHighlights);
 		
-		return InformationRetriever.getData(bquery,requiredHighlights);
+		logger.info(results);
+		
+		return results;
 	}
 
 

@@ -15,6 +15,7 @@ import org.apache.lucene.util.BytesRef;
 import org.apache.lucene.util.Version;
 
 import com.ftn.jan.ddm.analyzer.SerbianAnalyzer;
+import com.ftn.jan.ddm.analyzer.filter.CyrillicLatinConverter;
 import com.ftn.jan.ddm.model.SearchType;
 import com.ftn.jan.ddm.model.SearchType.Type;
 
@@ -23,7 +24,7 @@ public class QueryBuilder {
 	
 	private static final Version matchVersion = Version.LUCENE_4_9;
 	private static SerbianAnalyzer analyzer = new SerbianAnalyzer(matchVersion);
-	private static int maxEdits = 1;
+	private static int maxEdits = 2;
 	
 	public static int getMaxEdits(){
 		return maxEdits;
@@ -47,7 +48,15 @@ public class QueryBuilder {
 			throw new IllegalArgumentException(errorMessage);
 		}
 		
-		Term term = new Term(field, value.trim());
+		Term term = null;
+		
+//		(Fuzzy, Wildcard, Prefix, Regex, Range) are not analyzed, which can be problematic when indexing with a stemmer.
+		if(queryType.equals(Type.fuzzy)){
+			term = new Term(field, CyrillicLatinConverter.cir2lat(value.trim()));
+		}else{
+			term = new Term(field, value.trim());
+		}
+		
 		Query query = null;
 		if(queryType.equals(Type.regular)){
 			query = new TermQuery(term);

@@ -88,6 +88,9 @@
 					//Notification.success({message: 'Phrase', delay: 3000});
 					sec.searchModel.fields[i].value = sec.searchModel.fields[i].value.replace(/"/g,'');
 					sec.searchModel.fields[i].type = "Phrase";
+				}else if(sec.searchModel.fields[i].value.endsWith('~')){
+					sec.searchModel.fields[i].value = sec.searchModel.fields[i].value.replace('~','');
+					sec.searchModel.fields[i].type = "Fuzzy";
 				}
 			}
 			

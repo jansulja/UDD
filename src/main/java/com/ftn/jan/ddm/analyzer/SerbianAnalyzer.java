@@ -1,5 +1,6 @@
 package com.ftn.jan.ddm.analyzer;
 
+import java.io.IOException;
 import java.io.Reader;
 
 import org.apache.lucene.analysis.Analyzer;
@@ -9,6 +10,8 @@ import org.apache.lucene.analysis.core.StopFilter;
 import org.apache.lucene.analysis.miscellaneous.ASCIIFoldingFilter;
 import org.apache.lucene.analysis.snowball.SnowballFilter;
 import org.apache.lucene.analysis.standard.StandardTokenizer;
+import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
+import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
 import org.apache.lucene.util.Version;
 
 import com.ftn.jan.ddm.analyzer.filter.CyrilicToLatinFilter;
@@ -65,6 +68,7 @@ public class SerbianAnalyzer extends Analyzer {
 		//rezultat provuci kroz filtere redom
 		//filter za mala slova
 		TokenStream result = new LCFilter(source);
+		
 		//cirilica u latinicu filter
 		result = new CyrilicToLatinFilter(result);
 		//filter stop reci
@@ -77,5 +81,7 @@ public class SerbianAnalyzer extends Analyzer {
 		// redosled filtera je veoma bitan !!! zasto?
 		return new TokenStreamComponents(source, result);
 	}
+	
+
 
 }
