@@ -82,6 +82,15 @@
 				
 			// 	Notification.error({message: 'ERROR', delay: 3000});
 			// });	
+			
+			for(var i=0;i<sec.searchModel.fields.length;i++){
+				if(sec.searchModel.fields[i].value.startsWith('"')){
+					//Notification.success({message: 'Phrase', delay: 3000});
+					sec.searchModel.fields[i].value = sec.searchModel.fields[i].value.replace(/"/g,'');
+					sec.searchModel.fields[i].type = "Phrase";
+				}
+			}
+			
 
 			Restangular.all('search').post(sec.searchModel).then(function(response){
 				Notification.success({message: 'Finished', delay: 3000});
