@@ -111,12 +111,27 @@ public class PDFHandler extends DocumentHandler {
 	public Document getDocument(File file, EbookViewModel ebook) throws IncompleteIndexDocumentException {
 		// TODO Auto-generated method stub
 		Document doc = getDocument(file);
-		doc.add(new TextField("ebookId", ebook.getEbookId().toString(), Store.YES));
-		doc.add(new TextField("publicationYear", ebook.getPublicationYear().toString(), Store.YES));
-		doc.add(new TextField("mime", ebook.getMime(), Store.YES));
-		doc.add(new TextField("filename", ebook.getFilename(), Store.YES));
-		doc.add(new TextField("category", ebook.getCategory().getName(), Store.YES));
-		doc.add(new TextField("language", ebook.getLanguage().getName(), Store.YES));
+		
+		doc.removeField("author");
+		doc.removeField("title");
+		doc.removeField("keyword");
+		
+		String[] kws = ebook.getKeywords().trim().split(" ");
+		for(String kw : kws){
+			if(!kw.trim().equals("")){
+				doc.add(new TextField("keyword", kw, Store.YES));
+			}
+		}
+		doc.add(new TextField("author", ebook.getAuthor(), Store.YES));
+		doc.add(new TextField("title", ebook.getTitle(), Store.YES));
+		
+		
+		doc.add(new StringField("ebookId", ebook.getEbookId().toString(), Store.YES));
+		doc.add(new StringField("publicationYear", ebook.getPublicationYear().toString(), Store.YES));
+		doc.add(new StringField("mime", ebook.getMime(), Store.YES));
+		doc.add(new StringField("filename", ebook.getFilename(), Store.YES));
+		doc.add(new StringField("category", ebook.getCategory().getName(), Store.YES));
+		doc.add(new StringField("language", ebook.getLanguage().getName(), Store.YES));
 		
 		DocumentManager.printDocument(doc);
 		

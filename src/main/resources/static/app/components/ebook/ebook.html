@@ -4,13 +4,11 @@
 	<div id="sidebar-wrapper">
 		<ul class="sidebar-nav">
 			<li class="sidebar-brand">
-				<a href="#">
-					Categories
-				</a>
+				<a ui-sref="category" ng-class="ebc.getClassCategoryLink()">Categories</a>
 			</li>
 
 			<li ng-repeat="category in ebc.categories">
-				<a href="" ng-click="ebc.getEbooksForCategory(category.name)">{{category.name}}</a>
+				<a href="" ng-class="ebc.getClass(category.name)" ng-click="ebc.getEbooksForCategory(category.name)">{{category.name}}</a>
 			</li>
 
 
@@ -28,11 +26,20 @@
 					</h3><br />
 					
 
-					<p ng-hide="ebc.showTable" class="text-center" style="margin-top: 100px;">
+					<p ng-hide="ebc.showTable || ebc.ebooks.length===0" class="text-center" style="margin-top: 100px;">
 					 <span us-spinner="{radius:30, width:8, length: 16}" spinner-key="spinner-1" style="position: relative;"></span>
 </p>
-					<button ng-show="ebc.currentUser.type==='administrator'" ng-click="ebc.new()" type="button" class="btn btn-danger">Add ebook</button>
+					<p>
+					<button ng-show="ebc.currentUser.type==='administrator' && ebc.showTable" ng-click="ebc.new()" type="button" class="btn btn-danger"><i class="fa fa-plus-square fa-lg" aria-hidden="true">  Add ebook</i>  </button>
+					</p>
+					
 
+					<div ng-hide="ebc.showTable || ebc.spinner" class="jumbotron">
+					  <h1>Ebook list empty.</h1>
+					  <p>There are no books for the selected category.</p>
+					  <p ng-show="ebc.currentUser.type==='administrator'">Use button below to add some ebooks.</p>
+					  <p><button ng-show="ebc.currentUser.type==='administrator'" ng-click="ebc.new()" type="button" class="btn btn-danger btn-lg"><i class="fa fa-plus-square fa-2x" aria-hidden="true">  Add ebook</i>  </button></p>
+					</div>
 
 					<table ng-show="ebc.showTable" class="table table-bordered table-hover table-condensed">
 						<thead>
@@ -49,9 +56,7 @@
 								<th>
 									Publication year
 								</th>
-								<th>
-									Category
-								</th>
+								
 								<th>
 									Language
 								</th>
@@ -68,7 +73,7 @@
 								<td>{{ebook.author}}</td>
 								<td>{{ebook.keywords}}</td>
 								<td>{{ebook.publicationYear}}</td>
-								<td>{{ebook.category.name}}</td>
+								
 								<td>{{ebook.language.name}}</td>
 
 								<td ng-show="ebc.currentUser.type==='administrator'">
@@ -78,9 +83,9 @@
 									<button ng-click="ebc.edit(ebook)" type="button" class="btn btn-default btn-sm">
 										<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
 									</button>
-									<button ng-click="ebc.download(ebook.ebookId)" type="button" class="btn btn-default btn-sm">
+									<a ng-href="ebook/download/{{ebook.filename}}" role="button" class="btn btn-default btn-sm">
 										<span class="glyphicon glyphicon-download" aria-hidden="true"></span>
-									</button>
+									</a>
 								</td>
 
 								<td ng-show="ebc.currentUser.type==='pretplatnik' && !ebc.currentUser.category">

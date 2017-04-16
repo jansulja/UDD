@@ -13,7 +13,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.impl.Log4JLogger;
-import org.apache.lucene.search.BooleanClause.Occur;
+import org.apache.lucene.analysis.core.WhitespaceAnalyzer;
+import org.apache.lucene.queryparser.classic.ParseException;
+import org.apache.lucene.queryparser.classic.QueryParser;
+import org.apache.lucene.search.BooleanClause;
+import org.apache.lucene.search.BooleanQuery;
+import org.apache.lucene.search.Query;
+import org.apache.lucene.util.Version;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,12 +27,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.ftn.jan.ddm.searcher.InformationRetriever;
 import com.ftn.jan.ddm.searcher.SearchField;
 import com.ftn.jan.model.Ebook;
 import com.ftn.jan.service.EbookService;
@@ -165,18 +171,22 @@ public class EbookController {
 	}
 	
 	@RequestMapping(path = "/list/{category}", method = RequestMethod.GET)
-	public List<Ebook> listByCategory(@PathVariable("category") String category) {
+	public List<Ebook> listByCategory(@PathVariable("category") String category) throws ParseException {
 		
 
-		return searchService.search(new SearchViewModel(){{ setFields(Arrays.asList(new SearchField(){{ 
-			setField("category");
-			setOccur("MUST");
-			setType("Regular");
-			setValue(category);
+//		return searchService.search(new SearchViewModel(){{ setFields(Arrays.asList(new SearchField(){{ 
+//			setField("category");
+//			setOccur("MUST");
+//			setType("Regular");
+//			setValue(category);
+//
+//		}})); }});
 
-		}})); }});
-	
 		
+		QueryParser qp = new QueryParser(Version.LUCENE_4_9,"category",new WhitespaceAnalyzer(Version.LUCENE_4_9));
+		List<Ebook> results = InformationRetriever.getData(qp.parse("category:"+category));
+		return results;
+
 	}
 	
 	

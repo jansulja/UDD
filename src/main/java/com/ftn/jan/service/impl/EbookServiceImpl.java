@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 import org.apache.commons.logging.impl.Log4JLogger;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field.Store;
+import org.apache.lucene.document.StringField;
 import org.apache.lucene.document.TextField;
 import org.apache.lucene.index.IndexableField;
 import org.apache.lucene.index.Term;
@@ -20,7 +21,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Service;
 
-import com.ftn.jan.controller.EbookController;
 import com.ftn.jan.ddm.indexer.IndexManager;
 import com.ftn.jan.ddm.searcher.InformationRetriever;
 import com.ftn.jan.ddm.searcher.ResultRetriever;
@@ -115,19 +115,33 @@ public class EbookServiceImpl implements EbookService {
 		Arrays.stream(newEbook.getClass().getSuperclass().getDeclaredFields())
 				
 				.filter(f->!f.getName().equals("ebookId"))
+				.filter(f->!f.getName().equals("highlight"))
 
-				.forEach(field -> { fields.add(generateField(ebook,field));});
+				.forEach(field -> { fields.addAll(generateField(ebook,field));});
 		
 		return fields;
 	}
 
-	private static IndexableField generateField(Ebook newEbook, Field field) {
+	private static List<IndexableField> generateField(Ebook newEbook, Field field) {
 		
 		String name = field.getName();
 		String value = get(newEbook, name).toString();
 		
-		IndexableField f = new TextField(name , value , Store.YES);
-		return f;
+		List<IndexableField> fields = new ArrayList<>();
+		if(name.equals("keywords")){
+			String[] kws = value.trim().split(" ");
+			for(String kw : kws){
+				if(!kw.trim().equals("")){
+					fields.add(new TextField("keyword", kw, Store.YES));
+				}
+			}
+		}
+		else if(name.equals("author") || name.equals("title")){
+			fields.add( new TextField(name , value , Store.YES));
+		}else{
+			fields.add( new StringField(name,value,Store.YES));
+		}
+		return fields;
 	}
 
 	public static void main(String[] args){

@@ -64,10 +64,10 @@ public class InformationRetriever {
 			String[] allKeywords = doc.getValues("keyword");
 			temp = "";
 			for (String keyword : allKeywords) {
-				temp += keyword + ", ";
+				temp += keyword + " ";
 			}
 			if (!temp.equals("")) {
-				temp = temp.substring(0, temp.length() - 2);
+				temp = temp.substring(0, temp.length() - 1);
 			}
 			data.setKeywords(temp);
 
@@ -111,10 +111,10 @@ public class InformationRetriever {
 				String[] allKeywords = doc.getValues("keyword");
 				temp = "";
 				for (String keyword : allKeywords) {
-					temp += keyword + ", ";
+					temp += keyword + " ";
 				}
 				if (!temp.equals("")) {
-					temp = temp.substring(0, temp.length() - 2);
+					temp = temp.substring(0, temp.length() - 1);
 				}
 				data.setKeywords(temp);
 

@@ -13,7 +13,7 @@
 	
 		lic.login = function(){
 			LoginService.login(lic.user,function(){
-				$state.go('home');
+				$state.go('ebook');
 			},function(errorMessage){
 				Notification.error({message: errorMessage, delay: 3000});
 			});

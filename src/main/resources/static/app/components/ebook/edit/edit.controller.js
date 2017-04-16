@@ -3,14 +3,16 @@
 	angular.module('udd.ebook.edit')
 	.controller('EditController',EditController);
 	
-	EditController.$inject = ['Restangular','$uibModalInstance','Ebook','items','$http','Notification'];
+	EditController.$inject = ['Restangular','$uibModalInstance','Ebook','items','$http','Notification','usSpinnerService','localStorageService'];
 	
-	function EditController(Restangular,$uibModalInstance,Ebook,items,$http,Notification){
+	function EditController(Restangular,$uibModalInstance,Ebook,items,$http,Notification,usSpinnerService,localStorageService){
 		
 		var edc = this;
 		edc.title = "";
 		edc.file = {};
-		
+		edc.fileUploaded = false;
+
+
 
 		edc.init = function(){
 
@@ -31,12 +33,12 @@
 					if(items.status === 'edit'){
 						edc.title = "Edit";
 						edc.ebook = items.ebook;
+						edc.fileUploaded = true;
 					}else{
 						edc.title = "Create";
-
+						
 					}
-
-					
+	
 
 				}
 
@@ -60,6 +62,8 @@
 						}));
 					}
 
+					usSpinnerService.spin('spinner-upload');
+
 					$http.post("ebook/upload", fd, {
 						withCredentials: true,
 						headers: {'Content-Type': undefined },
@@ -78,10 +82,15 @@
 						edc.ebook.mime = "application/pdf";
 						edc.ebook.filename = edc.ebook.title+".pdf";
 						edc.ebook.language = edc.languages[0];
-						edc.ebook.category = edc.categories[0];
+						edc.ebook.category = edc.categories[findCategoryByName(edc.categories,localStorageService.get('currentCategoryName'))];
+
+						edc.fileUploaded = true;
+						usSpinnerService.stop('spinner-upload');
+
 
 					},function(error){
 						Notification.error({message: 'Invalid file', delay: 3000});
+						usSpinnerService.stop('spinner-upload');
 					});
 
 				}
@@ -90,6 +99,8 @@
 
 					if(items.status === 'edit'){
 						
+						localStorageService.set('currentCategoryName',edc.ebook.category.name);
+
 						var fd;
 
 						if(edc.editedUpload){
@@ -132,6 +143,16 @@
 							Notification.error({message: 'Invalid file', delay: 3000});
 						});
 					}
+				}
+
+				function findCategoryByName(array,name){
+					for (var i = array.length - 1; i >= 0; i--) {
+						if(array[i].name === name){
+							return i;
+						}
+					}
+
+					return -1;
 				}
 
 				edc.init();

@@ -3,7 +3,7 @@
 	    <h2 class="text-center"> {{edc.title}} ebook </h2>
 	</div>
 	<div class="modal-body">
-	    <div class="form-group">
+	    <div ng-show="edc.fileUploaded" class="form-group">
 	    	<div class="col-sm-8 col-sm-offset-2">
 	    		<label for="title" class="col-sm-2 control-label">Title</label>
 	    		<div class="col-sm-10">
@@ -12,7 +12,7 @@
 	    		</div> 
 	        </div>
 	    </div>
-	    <div class="form-group">
+	    <div ng-show="edc.fileUploaded" class="form-group">
 	    	<div class="col-sm-8 col-sm-offset-2">
 	    		<label for="author" class="col-sm-2 control-label">Author</label>
 	    		<div class="col-sm-10">
@@ -22,7 +22,7 @@
 	        </div>
 	    </div>
 
-	    <div class="form-group">
+	    <div ng-show="edc.fileUploaded" class="form-group">
 	    	<div class="col-sm-8 col-sm-offset-2">
 	    		<label for="keywords" class="col-sm-2 control-label">Keywords</label>
 	    		<div class="col-sm-10">
@@ -32,7 +32,7 @@
 	        </div>
 	    </div>
 	   
-		<div class="form-group">
+		<div ng-show="edc.fileUploaded" class="form-group">
 			    	<div class="col-sm-8 col-sm-offset-2">
 			    		<label for="publicationYear" class="col-sm-2 control-label">Publication year</label>
 			    		<div class="col-sm-10">
@@ -41,18 +41,10 @@
 			    		</div> 
 			        </div>
 			    </div>
-		<div class="form-group">
-	    	<div class="col-sm-8 col-sm-offset-2">
-	    		<label for="filename" class="col-sm-2 control-label">Filename</label>
-	    		<div class="col-sm-10">
-	    			<input class="form-control" ng-model-options="{updateOn: 'default blur', debounce: { 'default': 0, 'blur': 0}}" type="text" ng-model="edc.ebook.filename" id="filename" name="filename" placeholder="Filename"/ required>
-	    			<p class="text-center" ng-show="edc.form.filename.$touched && edc.form.filename.$error.required" style="color: red;" >Error Filename</p>
-	    		</div> 
-	        </div>
-	    </div>
+		
 
 	    		<div class="form-group">
-	    	<div class="col-sm-8 col-sm-offset-2">
+	    	<div ng-show="edc.fileUploaded" class="col-sm-8 col-sm-offset-2">
 	    		<label for="mime" class="col-sm-2 control-label">MIME</label>
 	    		<div class="col-sm-10">
 	    			<input  class="form-control" ng-model-options="{updateOn: 'default blur', debounce: { 'default': 0, 'blur': 0}}" type="text" ng-model="edc.ebook.mime" id="mime" name="mime" placeholder="MIME" disabled />
@@ -62,7 +54,7 @@
 	    </div>
 
 
-	    <div class="form-group">
+	    <div ng-show="edc.fileUploaded" class="form-group">
 	    	<div class="col-sm-8 col-sm-offset-2">
 	    		<label for="category" class="col-sm-2 control-label">Category</label>
 	    		<div class="col-sm-10">
@@ -74,7 +66,7 @@
 	    </div>
 
 	   
-	     <div class="form-group">
+	     <div ng-show="edc.fileUploaded" class="form-group">
 	    	<div class="col-sm-8 col-sm-offset-2">
 	    		<label for="language" class="col-sm-2 control-label">Language</label>
 	    		<div class="col-sm-10">
@@ -99,6 +91,18 @@
 	    			
 	    		
 	    		</div> 
+	    		
+	        </div>
+
+	       
+	    </div>
+	    <br />
+	    <div class="form-group">
+	    	<div class="col-sm-8 col-sm-offset-2">
+	    		 <p>
+					 <span us-spinner="{radius:10, width:2, length:6}" spinner-key="spinner-upload" ></span>
+			</p>
+
 	    		
 	        </div>
 	    </div>

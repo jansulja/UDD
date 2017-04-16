@@ -18,6 +18,7 @@
 				templateUrl: 'app/components/ebook/edit/edit.html',
 				controller: 'EditController',
 				controllerAs: 'edc',
+				windowClass: 'app-modal-window',
 				resolve:{
 					items: function(){
 						return {					
@@ -39,6 +40,7 @@
 				templateUrl: 'app/components/ebook/edit/edit.html',
 				controller: 'EditController',
 				controllerAs: 'edc',
+				windowClass: 'app-modal-window',
 				resolve:{
 					items: function(){
 						return {
