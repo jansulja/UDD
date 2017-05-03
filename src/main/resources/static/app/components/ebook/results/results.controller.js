@@ -7,9 +7,9 @@
 
 	angular.module('udd.ebook.results').controller('ResultsController',ResultsController); 
 
-	ResultsController.$inject = ['Restangular','ResultsService','Ebook','Notification','$http','LoginService'];
+	ResultsController.$inject = ['advModal','Restangular','ResultsService','Ebook','Notification','$http','LoginService'];
 
- 	function ResultsController(Restangular,ResultsService,Ebook,Notification,$http,LoginService) {
+ 	function ResultsController(advModal,Restangular,ResultsService,Ebook,Notification,$http,LoginService) {
 		var rec = this;
 
 		rec.results = ResultsService.getResults();
@@ -55,6 +55,12 @@
 		        a.click();
 		        window.URL.revokeObjectURL(url);
 		    };
+		}
+
+		rec.showAdv = function(){
+			advModal.open().then(function(){
+
+			});
 		}
 
 	}  

@@ -3,16 +3,16 @@
 	angular.module('udd.ebook.remove')
 	.controller('RemoveController',RemoveController);
 	
-	RemoveController.$inject = ['Restangular','$uibModalInstance','Ebook','$http','Notification'];
+	RemoveController.$inject = ['Restangular','items','$uibModalInstance','Ebook','$http','Notification'];
 	
-	function RemoveController(Restangular,$uibModalInstance,Ebook,$http,Notification){
+	function RemoveController(Restangular,items,$uibModalInstance,Ebook,$http,Notification){
 		
 		var rec = this;
 	
 		
 
 		rec.init = function(){
-
+			rec.text = items.text;
 			
 
 		}

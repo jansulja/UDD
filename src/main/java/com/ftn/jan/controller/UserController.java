@@ -60,7 +60,7 @@ public class UserController {
 	};
 	
 	@PutMapping
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasAnyRole('ROLE_SUBSCRIBER','ROLE_ADMIN')")
 	public void update(@RequestBody User user){
 		userService.update(user);
 	}

@@ -3,9 +3,9 @@
 	angular.module('udd.ebook.search')
 	.controller('SearchController',SearchController);
 	
-	SearchController.$inject = ['Restangular','$uibModalInstance','Ebook','$http','Notification'];
+	SearchController.$inject = ['localStorageService','usSpinnerService','Restangular','$uibModalInstance','Ebook','$http','Notification'];
 	
-	function SearchController(Restangular,$uibModalInstance,Ebook,$http,Notification){
+	function SearchController(localStorageService,usSpinnerService,Restangular,$uibModalInstance,Ebook,$http,Notification){
 		
 		var sec = this;
 	
@@ -56,6 +56,10 @@
 				
 
 			}
+			var model = localStorageService.get('searchModel');
+			if(model){
+				sec.searchModel = model;
+			}
 			
 
 		}
@@ -83,7 +87,12 @@
 			// 	Notification.error({message: 'ERROR', delay: 3000});
 			// });	
 			
+			localStorageService.set('searchModel',sec.searchModel);
+
 			for(var i=0;i<sec.searchModel.fields.length;i++){
+				if(!sec.searchModel.fields[i].value){
+					sec.searchModel.fields[i].value="";
+				}
 				if(sec.searchModel.fields[i].value.startsWith('"')){
 					//Notification.success({message: 'Phrase', delay: 3000});
 					sec.searchModel.fields[i].value = sec.searchModel.fields[i].value.replace(/"/g,'');
@@ -91,16 +100,21 @@
 				}else if(sec.searchModel.fields[i].value.endsWith('~')){
 					sec.searchModel.fields[i].value = sec.searchModel.fields[i].value.replace('~','');
 					sec.searchModel.fields[i].type = "Fuzzy";
+				}else {
+						sec.searchModel.fields[i].type = "Regular";
 				}
 			}
 			
+			usSpinnerService.spin('spinner-search');
 
 			Restangular.all('search').post(sec.searchModel).then(function(response){
 				Notification.success({message: 'Finished', delay: 3000});
 				console.log(response);
+				usSpinnerService.stop('spinner-search');
 				$uibModalInstance.close(response);
 
 			},function(){
+				usSpinnerService.stop('spinner-search');
 				Notification.error({message: 'ERROR', delay: 3000});
 			});
 

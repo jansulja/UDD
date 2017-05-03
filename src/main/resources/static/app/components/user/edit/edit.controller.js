@@ -46,10 +46,10 @@
 
 		euc.submitForm = function(){
 
-			if(items.status === 'edit'){
-
+			if(items.status === 'edit' || items.status === 'editProfile'){
+				euc.user.route = "user";
 				euc.user.put().then(function(){
-					Notification.success({message: 'Done', delay: 3000 });
+					Notification.success({message: 'Updated', delay: 3000 });
 					$uibModalInstance.close(euc.user);
 				},function(){
 					Notification.error({message: 'Error updating user', delay: 3000});
@@ -58,7 +58,13 @@
 			}else{
 
 				User.post(euc.user).then(function(){
-					Notification.success({message: 'Done', delay: 3000 });
+					if(euc.status === 'editProfile'){
+						Notification.success({message: 'User Profile Updated', delay: 3000 });
+					}else{
+						Notification.success({message: 'User Created', delay: 3000 });
+					}
+
+					
 					$uibModalInstance.close(euc.user);
 				},function(){
 					Notification.error({message: 'Error creating user', delay: 3000});

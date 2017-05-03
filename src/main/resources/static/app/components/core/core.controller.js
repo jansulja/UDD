@@ -3,9 +3,9 @@
 	angular.module('udd.core')
 		.controller('CoreController',CoreController);
 	
-	CoreController.$inject = ['LoginService','$state','searchModal','ResultsService'];
+	CoreController.$inject = ['$scope','LoginService','$state','searchModal','ResultsService'];
 	
-	function CoreController(LoginService,$state,searchModal,ResultsService){
+	function CoreController($scope,LoginService,$state,searchModal,ResultsService){
 		
 		var coc = this;
 		coc.currentUser ={firstname:undefined,lastname:undefined};
@@ -20,6 +20,9 @@
 				}
 			
 			);
+
+
+
 			
 		}
 		

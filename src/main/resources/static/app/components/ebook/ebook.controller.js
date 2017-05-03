@@ -30,6 +30,23 @@
 
 			});
 
+			Restangular.all('ebook/list').getList().then(function(ebooks){
+
+				var ebookCount = {};
+
+				for (var i = ebooks.length - 1; i >= 0; i--) {
+					var name = ebooks[i].category.name;
+					if(ebookCount[name]){
+						ebookCount[name]++;
+					}else{
+						ebookCount[name] = 1;
+					}
+				}
+
+				ebc.ebookCount = ebookCount;
+
+			});
+
 			
 
 			ebc.currentUser = LoginService.getCurrentUser();
@@ -63,14 +80,16 @@
 
 		ebc.delete = function(id){
 
-			removeModal.open().then(function(data) {
+			removeModal.open("Are you sure?").then(function(data) {
 				if(data){
 
 					$http.delete("ebook/delete/"+id)
 			.then(function(success){
 				
 				Notification.success({message: 'Ebook deleted', delay: 5000});
-				ebc.ebooks.splice(findIndexOfEbook(ebc.ebooks,id), 1);
+				var index = findIndexOfEbook(ebc.ebooks,id);
+				ebc.ebookCount[ebc.ebooks[index].category.name]--;
+				ebc.ebooks.splice(index, 1);
 				if(ebc.ebooks.length===0){
 					ebc.init();
 				}
@@ -157,6 +176,19 @@
 			}
 
 
+		}
+
+		ebc.getCount = function(category){
+			var count = 0;
+			if(ebc.ebookCount){
+				count = ebc.ebookCount[category.name];
+				if(!count){
+					count = 0;
+				}
+			}
+
+			
+			return count;
 		}
 
 		function findIndexOfEbook(array,ebookId){

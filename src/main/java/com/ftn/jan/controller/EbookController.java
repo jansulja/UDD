@@ -41,7 +41,6 @@ import com.ftn.jan.util.EbookPDFHandler;
 import com.ftn.jan.util.FileSystemStorageService;
 import com.ftn.jan.util.StorageService;
 import com.ftn.jan.viewmodel.EbookViewModel;
-import com.ftn.jan.viewmodel.SearchViewModel;
 
 import javassist.NotFoundException;
 
@@ -92,7 +91,7 @@ public class EbookController {
 	public Ebook upload(@RequestPart(name="ebookId",required=false) Long ebookId, @RequestPart("file") MultipartFile file,
 			RedirectAttributes redirectAttributes) {
 		logger.info(ebookId);
-		Ebook ebook = EbookPDFHandler.createEbookFromPDF(FileSystemStorageService.convert(file),ebookId);
+		Ebook ebook = EbookPDFHandler.createEbookFromPDF(file,ebookId);
 		System.out.println(ebook);
 		return ebook;
 

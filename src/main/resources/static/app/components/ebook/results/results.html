@@ -1,9 +1,30 @@
 
 <div class="cover">
-	<div class="background-image-fixed cover-image" style="background-image : url('assets/img/content.png')"></div>
-	<div class="row">
+	<div class="background-image-fixed cover-image" style="background-image : url('assets/img/content.png')">
+		
+	<div ng-show="rec.results.length === 0" class="row" style="padding-top: 100px;">
+		<div class="col-md-12 col-md-offset-2">
+			<p>Your search did not match any documents.</p>
+			<p>Suggestions: </p>
+			<ul>
+
+				<li>Make sure all words are spelled correctly.</li>
+				<li>Try different keywords.</li>
+				<li>Try more general keywords.</li>
+				<li>Try fuzzy search. <span><a href="#" class="link">Learn more</a></span></li>
+				
+
+			</ul>
+		</div>
+		
+	</div>
+
+	</div>
+
+	
+	<div ng-hide="rec.results.length === 0" class="row">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<h3>&nbsp;&nbsp;Results</h3>
+			<h3>&nbsp;&nbsp;Search Results</h3>
 			<udd-results ng-repeat="result in rec.results"></udd-results>
 		</div>
 		

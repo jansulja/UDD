@@ -8,7 +8,8 @@
 			</li>
 
 			<li ng-repeat="category in ebc.categories">
-				<a href="" ng-class="ebc.getClass(category.name)" ng-click="ebc.getEbooksForCategory(category.name)">{{category.name}}</a>
+				<a href="" ng-class="ebc.getClass(category.name)" ng-click="ebc.getEbooksForCategory(category.name)"><span class="label label-pill label-danger">{{ebc.getCount(category)}}</span>&nbsp&nbsp&nbsp  {{category.name}}  </a>
+
 			</li>
 
 
@@ -89,15 +90,15 @@
 								</td>
 
 								<td ng-show="ebc.currentUser.type==='pretplatnik' && !ebc.currentUser.category">
-									<button ng-click="ebc.download(ebook.ebookId)" type="button" class="btn btn-default btn-sm">
+									<a ng-href="ebook/download/{{ebook.filename}}" role="button" class="btn btn-default btn-sm">
 										<span class="glyphicon glyphicon-download" aria-hidden="true"></span>
-									</button>
+									</a>
 								</td>
 
 								<td ng-show="ebc.currentUser.type==='pretplatnik' && ebc.currentUser.category.name===ebook.category.name">
-									<button ng-click="ebc.download(ebook.ebookId)" type="button" class="btn btn-default btn-sm">
+									<a ng-href="ebook/download/{{ebook.filename}}" role="button" class="btn btn-default btn-sm">
 										<span class="glyphicon glyphicon-download" aria-hidden="true"></span>
-									</button>
+									</a>
 								</td>
 
 							</tr>

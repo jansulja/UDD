@@ -42,45 +42,7 @@ public class EbookServiceImpl implements EbookService {
 	
 	@Override
 	public List<Ebook> findAll() {
-		// TODO Auto-generated method stub
-		//return ebookRepository.findAll();
 		return InformationRetriever.getData(new MatchAllDocsQuery());
-	}
-
-	@Override
-	public void insertBook(Ebook ebook) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public Ebook findByTitle(String title) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Ebook> findByAuthor(String author) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Ebook> findByKeyword(String keyword) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Ebook> findByContent(String content) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Ebook> findByLanguage(Language language) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
@@ -96,11 +58,8 @@ public class EbookServiceImpl implements EbookService {
 
 		Query q = new TermQuery(new Term("ebookId", oldEbook.getEbookId().toString()));
 		Document doc = ResultRetriever.getResults(q).get(0);
-				
-		List<IndexableField> fields = generateFields(newEbook);//{new TextField("title", newEbook.getTitle(), Store.YES)};
-		fields.stream().peek(System.out::println);
-		
-		
+	
+		List<IndexableField> fields = generateFields(newEbook);
 		IndexManager.getIndexer().updateDocument(doc,fields.stream().toArray(IndexableField[]::new));
 		
 		
@@ -144,9 +103,6 @@ public class EbookServiceImpl implements EbookService {
 		return fields;
 	}
 
-	public static void main(String[] args){
-		generateFields(null);
-	}
 	
 	
 	private static Object get(Object object, String fieldName) {

@@ -7,9 +7,9 @@
 
 	angular.module('udd.user').controller('UserController',UserController); 
 
-	UserController.$inject = ['Restangular','editUserModal','Notification','User'];
+	UserController.$inject = ['$scope','Restangular','editUserModal','Notification','User','LoginService'];
 
-	function UserController(Restangular,editUserModal,Notification,User) {
+	function UserController($scope,Restangular,editUserModal,Notification,User,LoginService) {
 		
 		var usc = this;
 		
@@ -19,6 +19,7 @@
  			.then(function(users) {
 		  
 		  usc.users = users; 
+		  usc.currentUser = LoginService.getCurrentUser();
 		  console.log(users);
 		})
 
@@ -47,6 +48,7 @@
  		usc.edit = function(user){
  			editUserModal.edit(user).then(function(data){
  				usc.init();
+ 				
  			});
  		}
 

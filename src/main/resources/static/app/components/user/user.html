@@ -100,10 +100,10 @@
 									td_user_type_sub: usc.getUserType(user)==='sub'}">{{user.type}}</td>
                               <td style="border: 2px solid black;">{{user.category.name}}</td>
                               <td style="border: 2px solid black;">
-                                <button ng-click="usc.delete(user)" type="button" class="btn btn-default btn-sm">
+                                <button ng-hide="usc.getUserType(user)==='admin'" ng-click="usc.delete(user)" type="button" class="btn btn-default btn-sm">
                                   <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                 </button>
-                                <button ng-click="usc.edit(user)" type="button" class="btn btn-default btn-sm">
+                                <button ng-hide="usc.getUserType(user)==='admin'" ng-click="usc.edit(user)" type="button" class="btn btn-default btn-sm">
                                   <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                                 </button>
                               </td>

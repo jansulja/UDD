@@ -7,9 +7,9 @@
 
 	angular.module('udd.user.details').controller('UserDetailsController',UserDetailsController); 
 
-	UserDetailsController.$inject = ['User','LoginService','Notification','Restangular','editUserModal','editPasswordModal','$state'];
+	UserDetailsController.$inject = ['$rootScope','User','LoginService','Notification','Restangular','editUserModal','editPasswordModal','$state'];
 
-	function UserDetailsController(User,LoginService,Notification,Restangular,editUserModal,editPasswordModal,$state) {
+	function UserDetailsController($rootScope,User,LoginService,Notification,Restangular,editUserModal,editPasswordModal,$state) {
 		
 		var udc = this;
 
@@ -24,6 +24,7 @@
 		udc.edit = function(){
 
 			editUserModal.editProfile(udc.user).then(function(user){
+				$state.reload();
 
 			});
 
@@ -31,7 +32,8 @@
 
 		udc.changePassword = function(){
 			editPasswordModal.edit(udc.user).then(function(user){
-				$state.go('login');
+				$state.go("login",{},{reload:true});
+				
 			});
 		}
 

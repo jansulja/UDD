@@ -18,7 +18,7 @@ public interface UserService {
 	public User getLoggedInUser();
 	public User findByUsername(String username);
 	public void changePassword(String newPassword);
-	public boolean changePassword(ChangePasswordViewModel changePasswordViewModel);
+	public boolean changePassword(ChangePasswordViewModel changePasswordViewModel) throws Exception;
 	public void updateProfile(UserViewModel userViewModel);
 	public void logout();
 	public User findByUserId(Integer userId);

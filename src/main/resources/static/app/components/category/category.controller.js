@@ -7,9 +7,9 @@
 
 	angular.module('udd.category').controller('CategoryController',CategoryController); 
 
-	CategoryController.$inject = ['Restangular','editCategoryModal','Notification','Category'];
+	CategoryController.$inject = ['Restangular','removeModal','editCategoryModal','Notification','Category'];
 
-	function CategoryController(Restangular,editCategoryModal,Notification,Category) {
+	function CategoryController(Restangular,removeModal,editCategoryModal,Notification,Category) {
 		
 		var cac = this;
 		
@@ -25,7 +25,13 @@
  		}
 
  		cac.delete = function(category){
- 			Category.customDELETE(category.categoryId)
+ 			
+ 			var text = 'This will also remove all the ebooks of this category as well as all the users subscribed to this category. Are you sure you want to proceed?';
+
+ 			removeModal.open(text).then(function(data) {
+				if(data){
+
+			Category.customDELETE(category.categoryId)
                           .then(function(res){
                                Notification.success({message: 'Removed', delay: 3000});
                                cac.init();
@@ -34,6 +40,13 @@
                                Notification.error({message: 'Error removing category', delay: 3000});
                            } 
                           );
+
+				}
+				
+
+			});
+
+ 			
  		}
 
  		cac.create = function(){

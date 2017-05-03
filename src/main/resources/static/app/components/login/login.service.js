@@ -42,6 +42,8 @@
 				
 				that.firstname = undefined;
 				that.lastname = undefined;
+				that.type = undefined;
+				that.category = undefined;
 				success();
 			});
 		}

@@ -72,7 +72,7 @@ public class UserServiceImpl implements UserService {
 
 
 	@Override
-	public boolean changePassword(ChangePasswordViewModel changePasswordViewModel) {
+	public boolean changePassword(ChangePasswordViewModel changePasswordViewModel) throws Exception {
 		// TODO Auto-generated method stub
 		boolean valid = true;
 		
@@ -82,11 +82,11 @@ public class UserServiceImpl implements UserService {
 		User currentUser = this.findByUsername(currentPrincipalName);
 		
 		if(!currentUser.getPassword().equals(changePasswordViewModel.getOldPassword())){
-			return false;
+			throw new Exception("Invalid password");
 		}
 		
 		if(!changePasswordViewModel.getNewPassword().equals(changePasswordViewModel.getConfirmPassword())){
-			return false;
+			throw new Exception("New password and confirm password does not match");
 		}
 		
 		currentUser.setPassword(changePasswordViewModel.getNewPassword());

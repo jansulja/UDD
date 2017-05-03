@@ -17,7 +17,8 @@
  		epc.init = function(){
 
  			epc.passwordModel = {};
-
+ 			epc.passwordPattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$";
+ 			epc.passwordPatternErrorText = "Minimum 8 characters at least 1 Uppercase Alphabet, 1 Lowercase Alphabet and 1 Number";
  		}
 
  		epc.cancel = function(){
@@ -26,15 +27,23 @@
 
  		epc.submitForm =function(){
 
- 			User.customPOST(epc.passwordModel, "changePassword").then(function(data){
+ 			if(epc.passwordModel.newPassword!==epc.passwordModel.confirmPassword){
+ 				Notification.error({message: 'New password and confirm password does not match!', delay: 3000});
+ 			}else{
+ 				User.customPOST(epc.passwordModel, "changePassword").then(function(data){
 
  				Notification.success({message: 'Password Changed', delay: 3000});
  				$uibModalInstance.close();
+ 				
 
  			},function(data){
 
- 				Notification.error({message: 'Password change error', delay: 3000});
+ 				Notification.error({message: data.data.message, delay: 3000});
  			});
+ 			}
+
+
+ 			
 
  		}
 
